@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'db_sgs',
+	'hostname' => '160.153.221.36',
+	'username' => 'admsgs',
+	'password' => '0J-S*=1gZZ(g',
+	'database' => 'db_sgs_new',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
