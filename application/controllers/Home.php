@@ -637,4 +637,52 @@ class Home extends CI_Controller
 	    }
 			 echo json_encode($res);
 	}
+
+
+
+
+	function news_act()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_error_delimiters('<div style="color:red;" >', '</div>');
+		$this->form_validation->set_rules('email','Email','required|trim|valid_email');
+		
+		if(!$this->form_validation->run())
+        {    
+               $errors = $this->form_validation->error_array();
+    			$res = array("res"=>0,"errors"=>$errors);
+                      
+        }
+        else
+        {
+
+			
+			
+			 $email = $this->input->post('email');  			 
+			 $param['nl_email']=$email;
+			if($this->Main->getDetailedData('*','tbl_newsletter',array('nl_email'=>$email)))
+			{
+				$res = array("res"=>0,"msg"=>'Email Already Exisiting');
+			}
+       else
+          {
+
+
+			if($this->Main->insert($param,'tbl_newsletter'))
+			{
+				
+				$res = array("res"=>1,"msg"=>'News letter Subscription Successfull.');
+				
+			}
+			else
+			{
+				$res = array("res"=>0,"msg"=>'something wrong');
+			}
+			
+			
+	    }
+	}	 
+		echo json_encode($res);
+
+	}
 }
