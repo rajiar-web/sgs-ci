@@ -1,0 +1,1 @@
+[28-Oct-2020 11:42:27 UTC] PHP Fatal error:  Trait 'PHPMailer\PHPMailer\PHPMailer' not found in /home/sr3tb3u95i45/public_html/cheyne-and-co/application/controllers/Home.php on line 7

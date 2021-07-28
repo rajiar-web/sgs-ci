@@ -1,0 +1,8 @@
+<input type="hidden" id="base" value="<?=base_url();?>">
+<footer class="main-footer">
+    <strong>Copyright &copy; 2020 <a href="http://adminlte.io/">Hintt</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 0.0.1
+    </div>
+  </footer>
