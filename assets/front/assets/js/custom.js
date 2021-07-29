@@ -157,4 +157,73 @@ function increaseValue() {
    value--;
    document.getElementById('number').value = value;
    }
+   
 
+   $(document).on('click','.email-btn',function(){
+     
+      $('.validation-error').html('');
+      $("#spinner").show();
+      $(".cat-btn").hide();
+      var baseurl   = $("#base").val();
+      var email=$("#email").val();
+  
+      var form_data = new FormData();
+     
+      form_data.append('email', email);
+         $.ajax({
+           
+            url : baseurl+'newsletter-action',
+            type : 'post',
+            data : form_data,
+            cache: false,
+            contentType: false,
+            processData: false,
+    
+              success:function(data)
+              { 
+                  //console.log(data);
+                  $(".error").html("");
+                  $("#spinner").hide();
+                  $(".cat-btn").show();
+                  if(data.res == 1)
+                   { 
+                      alertify.success(data.msg);
+                    
+                   }
+                   else
+                {
+                  
+                    if($.isEmptyObject(data.errors))
+                    {
+                        alertify.error(data.msg);
+                    }
+                    else
+                    {
+                        for(var key in data.errors)
+                        {
+                           var v = data.errors[key];
+                           alertify.error(v);
+    
+                        }
+                    }
+                    
+                    
+                    
+                }
+    
+                 
+              }
+          }); 
+    
+      return false;
+
+    })
+
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> anitha
