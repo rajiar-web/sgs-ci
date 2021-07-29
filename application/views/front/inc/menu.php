@@ -118,14 +118,14 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
             <!-- droopmenu-header -->
             <div class="droopmenu-nav">
                <ul class="droopmenu">
-                  <li><a href="#">All Products</a></li>
+                  <li><a href="<?=base_url()?>listing">All Products</a></li>
                   
                   <?php 
                   foreach($cat as $index=>$ccc)
                      { 
                         if($index<8) {?>
                   <li>
-                     <a href="<?=$ccc['slug']?>"><?=$ccc['cat']?></a>
+                     <a href="<?=base_url()?>cat-detail/<?=$ccc['slug']?>"><?=$ccc['cat']?></a>
                      <?php
                         if(!empty($ccc['subcat']))
                         { ?>
@@ -133,7 +133,7 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                               <?php
                                  foreach($ccc['subcat'] as $index=>$subc)
                                  { ?>
-                              <li><a href="<?=$subc['c_slug']?>"><?=$subc['c_category']?></a></li>
+                              <li><a href="<?=base_url()?>cat-detail/<?=$subc['c_slug']?>"><?=$subc['c_category']?></a></li>
                               <?php } ?>
                            </ul>
                      <?php } ?>
