@@ -63,7 +63,7 @@ $route['service-detail/(:any)'] = 'Home/service_detail/$1';
 
 $route['index-form-action'] ='Home/index_contact_act';
 $route['contact-form-action'] ='Home/contact_act';
-$route['newsletter-action'] ='Home/news_act';
+
 
 //start
 
@@ -88,6 +88,8 @@ $route['address-delete'] = 'Home/add_delete';
 $route['profile-update-action'] = 'Home/profileupdateaction';
 
 $route['listing'] = 'Home/listing';
+$route['product-detail/(:any)'] = 'Home/product_detail/$1';
+$route['cat-detail/(:any)'] = 'Home/cat_detail/$1';
 
 
 

@@ -102,8 +102,8 @@ $( document ).ready(function() {
 });
 
 
-// /////////////////////////////////// cart sidebar nav
-     $(".ctgli:has(.ctgulChild)").click(function (e) {
+// /////////////////////////////////// cart sidebar nav    $(".ctgli:has(.ctgulChild)").click(function (e) {
+     $(".ctgli").click(function (e) {
         e.preventDefault();
         //li_HAVE_Child-hasShowed-hasSlideD
         if($(this).hasClass('showed')){
@@ -123,11 +123,13 @@ $( document ).ready(function() {
             $(this).children('.ctgulChild').slideToggle();
           
         }
-       });
+       }).on('click','.ctgliChild a',function(e) {
+         e.stopPropagation();
+    });
        
-       $('.ctgli').click(function(){
-        $(this).toggleClass('wtok');
-       });
+      //  $('.ctgli').click(function(){
+      //   $(this).toggleClass('wtok');
+      //  });
 
 
 
@@ -156,67 +158,3 @@ function increaseValue() {
    document.getElementById('number').value = value;
    }
 
-
-
-
-
-
-   $(document).on('click','.email-btn',function(){
-     
-      $('.validation-error').html('');
-      $("#spinner").show();
-      $(".cat-btn").hide();
-      var baseurl   = $("#base").val();
-      var email=$("#email").val();
-  
-      var form_data = new FormData();
-     
-      form_data.append('email', email);
-         $.ajax({
-           
-            url : baseurl+'newsletter-action',
-            type : 'post',
-            data : form_data,
-            cache: false,
-            contentType: false,
-            processData: false,
-    
-              success:function(data)
-              { 
-                  //console.log(data);
-                  $(".error").html("");
-                  $("#spinner").hide();
-                  $(".cat-btn").show();
-                  if(data.res == 1)
-                   { 
-                      alertify.success(data.msg);
-                    
-                   }
-                   else
-                {
-                  
-                    if($.isEmptyObject(data.errors))
-                    {
-                        alertify.error(data.msg);
-                    }
-                    else
-                    {
-                        for(var key in data.errors)
-                        {
-                           var v = data.errors[key];
-                           alertify.error(v);
-    
-                        }
-                    }
-                    
-                    
-                    
-                }
-    
-                 
-              }
-          }); 
-    
-      return false;
-
-    })
