@@ -158,3 +158,6 @@ function increaseValue() {
    document.getElementById('number').value = value;
    }
 
+function test()
+{
+}
