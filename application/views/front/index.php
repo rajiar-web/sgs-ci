@@ -242,8 +242,7 @@
                   £5 discount for your first order
                </h2>
                <form class="input-group w-50 m-auto">
-                  <input type="email" class="form-control" placeholder="Your-Email" aria-label="email" id="email" name="email">
-                  <span id="email_error" class="validation-error"></span>
+                  <input type="email" class="form-control" placeholder="Your-Email" aria-label="email">
                   <button class="btn btn-outline-primary email-btn" type="button" data-mdb-ripple-color="dark"> <img src="<?=front_images()?>email.png" alt=""> </button>
                </form>
             </div>
@@ -254,8 +253,8 @@
 
         <!-- footer Start -->
         <?php $this->load->view('front/inc/footer');?>
-        <script src="<?=front_js();?>custom.js"></script>
-        
+
+                    
         <?php $this->load->view('front/inc/scripts');?>
 
 

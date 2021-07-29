@@ -260,6 +260,3 @@ $(document).ready(function(){
     });
 
 });
-
-
-

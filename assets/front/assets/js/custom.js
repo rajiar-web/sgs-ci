@@ -102,8 +102,8 @@ $( document ).ready(function() {
 });
 
 
-// /////////////////////////////////// cart sidebar nav
-     $(".ctgli:has(.ctgulChild)").click(function (e) {
+// /////////////////////////////////// cart sidebar nav    $(".ctgli:has(.ctgulChild)").click(function (e) {
+     $(".ctgli").click(function (e) {
         e.preventDefault();
         //li_HAVE_Child-hasShowed-hasSlideD
         if($(this).hasClass('showed')){
@@ -123,11 +123,13 @@ $( document ).ready(function() {
             $(this).children('.ctgulChild').slideToggle();
           
         }
-       });
+       }).on('click','.ctgliChild a',function(e) {
+         e.stopPropagation();
+    });
        
-       $('.ctgli').click(function(){
-        $(this).toggleClass('wtok');
-       });
+      //  $('.ctgli').click(function(){
+      //   $(this).toggleClass('wtok');
+      //  });
 
 
 
@@ -156,12 +158,10 @@ function increaseValue() {
    document.getElementById('number').value = value;
    }
 
-
-
-
-
-
-   $(document).on('click','.email-btn',function(){
+function test()
+{
+}
+  $(document).on('click','.email-btn',function(){
      
       $('.validation-error').html('');
       $("#spinner").show();

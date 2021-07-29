@@ -14,7 +14,7 @@
       <section class="banner-detail-page">
          <div class="container">
             <div class="row">
-               <h2 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900">All Products</h2>
+               <h2 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900"><?=$main_cat?>e</h2>
             </div>
          </div>
       </section>
@@ -47,7 +47,7 @@
                               foreach($cd['subcat'] as $sc)
                               { ?>
                               <li class="ctgliChild">
-                                 <a href="<?=base_url()?>cat-detail/<?=$cd['slug']?>" class="ctgaChild"><?=$sc['c_category']?></a>
+                                 <a href="<?=base_url()?>cat-detail/<?=$sc['c_slug']?>" class="ctgaChild"><?=$sc['c_category']?></a>
                               </li>
                               <?php } ?>
                               
@@ -81,10 +81,12 @@
                   <div class="row" id="prolist">
                      
                      <?php 
+                     if(!empty($products))
+                     {
                      foreach($products as $ind=>$p)
                      {
                         if($ind<9) { ?>
-                     <div class="col-12 col-lg-4 col-md-12 my-3 d-flex">
+                     <div class="col-12 col-lg-4 col-md-12 my-3" style="width: auto;">
                         <a href="<?=base_url()?>product-detail/<?=$p->p_slug?>">
                            <div class="card w-100">
                               <div class="product-image d-flex">
@@ -98,12 +100,17 @@
                            </div>
                         </a>
                      </div>
-                     <?php } }?>
+                     <?php } } }
+                     else{?>
+                     <p>No products found </p>
+                     <?php } ?>
 
                      
                   </div>
                </div>
-
+               <?php 
+                     if(!empty($products))
+                     { ?>
                <div class="col-12 d-flex justify-content-end">
                   <nav aria-label="...">
                      <ul class="pagination">
@@ -122,6 +129,8 @@
                      </ul>
                   </nav>
                </div>
+
+            <?php } ?>
             </div>
          </div>
       </section>
