@@ -75,9 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+// 	'hostname' => '160.153.221.36',
+// 	'username' => 'admsgs',
+// 	'password' => '0J-S*=1gZZ(g',
+// 	'database' => 'db_sgs_new',
+	'hostname' => 'mysql-41283-0.cloudclusters.net:19430',
+	'username' => 'admin',
+	'password' => 'SZ1ITvPb',
 	'database' => 'db_sgs',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
