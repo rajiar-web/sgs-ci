@@ -158,9 +158,7 @@ function increaseValue() {
    document.getElementById('number').value = value;
    }
 
-function test()
-{
-}
+
   $(document).on('click','.email-btn',function(){
      
       $('.validation-error').html('');
@@ -220,7 +218,4 @@ function test()
       return false;
 
     })
-    function test()
-    {
-       
-    }
+ 
