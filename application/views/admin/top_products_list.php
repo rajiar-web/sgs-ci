@@ -43,10 +43,10 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-            <a href="add-slider">
+            <a href="add-top-products">
             <button type="button" class="btn-md cat-btn btn-primary pull-right" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 Add</button></a>
-              <h3 class="card-title">Slider
+              <h3 class="card-title">Top Products
               
               </h3>
               
@@ -55,18 +55,14 @@ Add</button></a>
             <div class="card-body" id="menu_tbl_div">
               
 
-            <table id="slider_list" >  
+            <table id="table_list" >  
        <thead>
         <tr>
         <th>No</th>
         <th>Image</th>
         <th>Title</th>
-        <th>Description</th> 
-        <th>Original Price</th>
-        <th>Discount Price</th>
-        <th>URL</th>
-        <th>Offer</th>
-        <th>Status</th> 
+         <th>Description</th>
+        <th>Link</th>
         <th>Action</th> 
         </tr>
     </thead>
@@ -81,19 +77,19 @@ Add</button></a>
                     foreach($records as $index=>$r)
                     {
                      $img = '';
-                     $images = $r->s_image;
+                     $images = $r->image;
                       if(!empty($images))
                       {
                        
                         $pathinfo = pathinfo($images);
-                        if(file_exists('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']))
+                        if(file_exists('assets/front/assets/img/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']))
                         {
-                          $pp = base_url('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']);
+                          $pp = base_url('assets/front/assets/img/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']);
                           $img = '<img src="'.$pp.'">';
                         }
                         else
                         {
-                          $pp = base_url('assets/front/img/slider/'.$images);
+                          $pp = base_url('assets/front/assets/img/'.$images);
                           $img = '<img class="zoom" src="'.$pp.'" width="60" height="60">';
                         }
 
@@ -108,21 +104,18 @@ Add</button></a>
                       <tr>
                       <td><?=$i++;?></td>
                       <td><?=$img;?></td>
-                      <td><?=$r->s_title; ?></td>
-                      <td><?=$r->s_desc; ?></td>
-                      <td><?=$r->s_original_price; ?></td>
-                      <td><?=$r->s_discount_price; ?></td>
-                      <td><?=$r->s_url; ?></td>
-                      <td><?=$r->s_offer; ?></td>
-                      <td><?=($r->s_status=='1'?'active':'inactive');?></td>
-                        
-                       
-                        
-                       
-                        <td>  <a href="add-slider/<?=$r->s_id;?>"  class="btn edit-cat btn-info" title="Edit"> <i class="fa fa-edit"></i></a>
-                         
-                     <a href="javascript:void(0)" id="<?=$r->s_id;?>" class="btn del-slider  btn-danger" title="Delete"> <i class="fa fa-trash"></i></a>
+                      <td><?=$r->title; ?></td>
+                      <td><?=$r->des; ?></td>
+                      <td><?=$r->link; ?></td>
                    
+                        
+                       
+                        
+                       
+                        <td>  <a href="add-top-products/<?=$r->id;?>"  class="btn edit-cat btn-info" title="Edit"> <i class="fa fa-edit"></i></a>
+                         
+                     <a href="javascript:void(0)" id="<?=$r->id;?>" class="btn del-top-products  btn-danger" title="Delete"> <i class="fa fa-trash"></i></a>
+                
                      </td>
                            
                       
@@ -167,7 +160,7 @@ Add</button></a>
 
 <?php $this->load->view('admin/inc/scripts');?>
 <script src="<?=admin_custom_js();?>common.js"></script>
-<script src="<?=admin_custom_js();?>slider.js"></script>
+<script src="<?=admin_custom_js();?>top_products.js"></script>
 
  
  <!-- DataTables -->
@@ -177,7 +170,7 @@ Add</button></a>
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#slider_list').DataTable();
+    $('#table_list').DataTable();
   
 });
 </script> 

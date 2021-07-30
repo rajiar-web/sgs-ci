@@ -43,10 +43,10 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-            <a href="add-slider">
+            <a href="add-attributes">
             <button type="button" class="btn-md cat-btn btn-primary pull-right" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>
 Add</button></a>
-              <h3 class="card-title">Slider
+              <h3 class="card-title">Attributes
               
               </h3>
               
@@ -55,17 +55,11 @@ Add</button></a>
             <div class="card-body" id="menu_tbl_div">
               
 
-            <table id="slider_list" >  
+            <table id="attributes_list" >  
        <thead>
         <tr>
         <th>No</th>
-        <th>Image</th>
-        <th>Title</th>
-        <th>Description</th> 
-        <th>Original Price</th>
-        <th>Discount Price</th>
-        <th>URL</th>
-        <th>Offer</th>
+        <th>Product Attributes</th> 
         <th>Status</th> 
         <th>Action</th> 
         </tr>
@@ -80,24 +74,7 @@ Add</button></a>
                      $i=1;
                     foreach($records as $index=>$r)
                     {
-                     $img = '';
-                     $images = $r->s_image;
-                      if(!empty($images))
-                      {
-                       
-                        $pathinfo = pathinfo($images);
-                        if(file_exists('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']))
-                        {
-                          $pp = base_url('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']);
-                          $img = '<img src="'.$pp.'">';
-                        }
-                        else
-                        {
-                          $pp = base_url('assets/front/img/slider/'.$images);
-                          $img = '<img class="zoom" src="'.$pp.'" width="60" height="60">';
-                        }
-
-                      } 
+                    
                  
                       ?>
 
@@ -107,23 +84,15 @@ Add</button></a>
 
                       <tr>
                       <td><?=$i++;?></td>
-                      <td><?=$img;?></td>
-                      <td><?=$r->s_title; ?></td>
-                      <td><?=$r->s_desc; ?></td>
-                      <td><?=$r->s_original_price; ?></td>
-                      <td><?=$r->s_discount_price; ?></td>
-                      <td><?=$r->s_url; ?></td>
-                      <td><?=$r->s_offer; ?></td>
-                      <td><?=($r->s_status=='1'?'active':'inactive');?></td>
+                      <td><?=$r->a_attribute; ?></td>
+                      <td><?=($r->a_status=='1'?'active':'inactive');?></td>
                         
                        
                         
                        
-                        <td>  <a href="add-slider/<?=$r->s_id;?>"  class="btn edit-cat btn-info" title="Edit"> <i class="fa fa-edit"></i></a>
+                        <td>  <a href="add-attributes/<?=$r->a_id;?>"  class="btn edit-cat btn-info" title="Edit"> <i class="fa fa-edit"></i></a>
                          
-                     <a href="javascript:void(0)" id="<?=$r->s_id;?>" class="btn del-slider  btn-danger" title="Delete"> <i class="fa fa-trash"></i></a>
-                   
-                     </td>
+                     <a href="javascript:void(0)" id="<?=$r->a_id;?>" class="btn del-attributes  btn-danger" title="Delete"> <i class="fa fa-trash"></i></a></td>
                            
                       
                         
@@ -167,7 +136,7 @@ Add</button></a>
 
 <?php $this->load->view('admin/inc/scripts');?>
 <script src="<?=admin_custom_js();?>common.js"></script>
-<script src="<?=admin_custom_js();?>slider.js"></script>
+<script src="<?=admin_custom_js();?>attributes.js"></script>
 
  
  <!-- DataTables -->
@@ -177,7 +146,7 @@ Add</button></a>
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#slider_list').DataTable();
+    $('#attributes_list').DataTable();
   
 });
 </script> 
