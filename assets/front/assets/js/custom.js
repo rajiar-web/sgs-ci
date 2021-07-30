@@ -218,7 +218,11 @@ function increaseValue() {
       return false;
 
     })
+<<<<<<< HEAD
 
 
 
 
+=======
+ 
+>>>>>>> anitha
