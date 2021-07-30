@@ -69,7 +69,7 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                               else
                               { ?>
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-profile"><i class="far fa-user mx-2"></i><?=!empty($sss['lg_user']['name'])?$sss['lg_user']['name']:""?></a>
-                              <?php
+                                 <?php
                               }
                               ?>
                            </li>
