@@ -219,11 +219,6 @@ function increaseValue() {
 
     })
 
-<<<<<<< HEAD
-=======
 
 
 
-
-
->>>>>>> anitha
