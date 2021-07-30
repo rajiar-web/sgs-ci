@@ -2,7 +2,7 @@
 //ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Slider_controller extends CI_Controller 
+class Products_controller extends CI_Controller 
 {
 
 	function __construct()
@@ -17,46 +17,43 @@ class Slider_controller extends CI_Controller
        
 	}
 	
-    function slider()
+    function products()
 	{
         
-        $query = $this->db->get("tbl_slider"); 
-        $data['records'] = $query->result();
-		$data['breadcrumb'] = array("title"=>"Slider","links"=>array("Home"=>"#","Slider"=>"#"));
-		$this->load->view('admin/slider_list',$data); 
+        $data['records'] = $this->Main->getProducts();
+		$data['breadcrumb'] = array("title"=>"Products","links"=>array("Home"=>"#","Products"=>"#"));
+		$this->load->view('admin/products_list',$data); 
 	}
 	
 
-	public function add_slider($id='')
+	public function add_products($id='')
 	{ 
-       
+        $data['category'] = $this->Main->getData('tbl_category',array('c_status'=>'1'));
         
         if($id!='')
 		{
          
-            $data['records']=$this->Main->getDetailedData('*','tbl_slider',array('s_id'=>$id));
+            $data['records']=$this->Main->getDetailedData('*','tbl_products',array('p_id'=>$id));
 			 
 		}
-         $data['breadcrumb'] = array("title"=>"Add Slider","links"=>array("Home"=>"#","Add Slider"=>"#"));
+         $data['breadcrumb'] = array("title"=>"Add Products","links"=>array("Home"=>"#","Add Products"=>"#"));
 	
-		$this->load->view('admin/add_slider',$data); 
+		$this->load->view('admin/add_products',$data); 
 
 
          
     }
 	
-    function slider_action()
+    function products_action()
 	{
 	
         $this->load->library('form_validation');
           
-        $this->form_validation->set_rules('imgname','Slider Image','required');
+        $this->form_validation->set_rules('imgname','Product Image','required');
         $this->form_validation->set_rules('title','Title','required');
-        $this->form_validation->set_rules('desc','Description','required');
         $this->form_validation->set_rules('original','Original Price','required|numeric');
         $this->form_validation->set_rules('discount','Discount Price','required|numeric');
-        $this->form_validation->set_rules('url','URL','required|callback_validate_url');
-		$this->form_validation->set_rules('offer','Offer','required');
+        $this->form_validation->set_rules('category','Category','required');
         
   
         
@@ -76,13 +73,12 @@ class Slider_controller extends CI_Controller
         
 		
 			    $sId = $this->input->post('cid');
-                $param['s_image'] = $this->input->post('imgname');
-                $param['s_title'] = $this->input->post('title');
-                $param['s_desc'] = $this->input->post('desc');
-                $param['s_discount_price'] =$this->input->post('discount');
-                $param['s_original_price'] =$this->input->post('original');
-                $param['s_url'] = $this->input->post('url');
-				$param['s_offer'] = $this->input->post('offer');
+                $param['p_image'] = $this->input->post('imgname');
+                $param['p_title'] = $this->input->post('title');
+                $param['p_desc'] = $this->input->post('desc');
+                $param['p_discound_price'] = $this->input->post('discount');
+                $param['p_original_price'] = $this->input->post('original');
+                $param['p_category'] = $this->input->post('category');
         
         
         
@@ -90,10 +86,10 @@ class Slider_controller extends CI_Controller
 				{
 				
 					
-					if($this->Main->insert($param,"tbl_slider"))
-						$res = array("res"=>1,"msg"=>'Slider Added');
+					if($this->Main->insert($param,"tbl_products"))
+						$res = array("res"=>1,"msg"=>'Product Added');
 					else
-						$res = array("res"=>0,"msg"=>'Failed to add Slider');
+						$res = array("res"=>0,"msg"=>'Failed to add Product');
 				}
 				else
 				{
@@ -101,10 +97,10 @@ class Slider_controller extends CI_Controller
 
 
 					
-					if($this->Main->update_slider($param,$sId))
-						$res = array("res"=>1,"msg"=>'Slider Edited');
+					if($this->Main->update_products($param,$sId))
+						$res = array("res"=>1,"msg"=>'Products Edited');
 					else
-						$res = array("res"=>0,"msg"=>'Failed to edit Slider');
+						$res = array("res"=>0,"msg"=>'Failed to edit products');
 
 				}
 			
@@ -116,18 +112,18 @@ class Slider_controller extends CI_Controller
 	
 
 
-   function slider_delete()
+   function products_delete()
 	{
 		 $id = $this->input->post('id');
 		
 		if(!empty($id))
 		{
 			
-				if($this->Main->delete_slider($id))
-					$res = array("res"=>1,"msg"=>'Slider deleted');
+				if($this->Main->delete_products($id))
+					$res = array("res"=>1,"msg"=>'Products deleted');
 				
 				else
-					$res = array("res"=>0,"msg"=>'Failed to delete Slider');
+					$res = array("res"=>0,"msg"=>'Failed to delete Products');
 		}
 		else
 			$res = array("res"=>0,'msg'=>'Id not found');
@@ -141,7 +137,7 @@ class Slider_controller extends CI_Controller
 		$this->load->library('image_lib');
 			if(!empty($_FILES['file']['name']))
 			{ 
-			$path = 'assets/front/img/slider/';
+			$path = 'assets/front/img/products/';
 			$uploadPath = './'.$path;
 	        if (!is_dir($uploadPath))
 	        {
@@ -195,26 +191,66 @@ class Slider_controller extends CI_Controller
         
    }
 
-   function validate_url($url) 
+
+
+   function set_attribute($id='')
    {
-       if(!empty($url))
+       
+       $data['id']=$id;
+   
+       $data['records'] = $this->Main->getData('tbl_products_attributes',array('a_id!='=>NULL));
+       $product=$this->Main->getDetailedData('*','tbl_product_details',array('p_id'=>$id));
+       $prd = array();
+       if(!empty($product))
        {
-          
-           if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url)) 
+           
+           foreach($product as $prdct)
            {
-               $this->form_validation->set_message("validate_url","Invalid URL");
-               $res = array("res"=>0,"msg"=>'Invalid URL');
-               return FALSE;
-           } 
-           else 
-           {
-               return TRUE;
+               $prd[$prdct->pdn_id] = $prdct->pd_answer;
            }
        }
-   
+       $data['prcateg'] = $prd;
+       
+       $data['breadcrumb'] = array("title"=>"Set Attribute","links"=>array("Home"=>"#","Set Attribute"=>"#"));
+       $this->load->view('admin/set_attribute',$data); 
    }
 
-   
+
+function attribute_action()
+{
+
+    $pid=$this->input->post('cid');
+	$pdnid=$this->input->post('attribute');
+	$answers=$this->input->post('answer');
+	
+	$arr=array();
+	$ansarr=array();
+	if(count($pdnid)>0)
+	{
+		if(!empty($pid))
+		{
+			$this->Main->delete_attributes($pid);
+		}
+		foreach($pdnid as $val)
+		{
+		$ans=$answers[$val];
+		$ansarr=array("pdn_id"=>$val,"p_id"=>$pid,'pd_answer'=>$ans);
+		array_push($arr,$ansarr);
+		}
+	
+	   if($this->Main->batch_insert($arr,"tbl_product_details"))
+	   {
+	    $res = array("res"=>1,"msg"=>'Attributes Inserted Successfully');
+	    }
+		else
+		{
+		$res = array("res"=>0,"msg"=>'Failed to insert Attributes');			
+		}
+		echo json_encode($res);
+}
+
+}
+
 
 	
 }

@@ -191,31 +191,15 @@
 
 
       <div class="row">
-
-
-
-      <div class="col-md-4 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="far fa-comment"></i></span>
-
-            <div class="info-box-content">
-            <a href="<?=base_url('contact');?>"><span class="info-box-text">Messages</span></a>
-              <span class="info-box-number"><?=$count_message?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-
-        
        <!-- /.col -->
        <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="fas fa-users" style="color:#fff;"></i></span>
 
             <div class="info-box-content">
-            <a href="<?=base_url('services_list');?>"><span class="info-box-text">Services</span></a>
+            <a href="products"><span class="info-box-text">Products</span></a>
+            <span class="info-box-number"><?=$count_services?></span>
+              <span class="info-box-number"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -225,7 +209,20 @@
 
 
 
-        
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="far fa-square"></i></span>
+
+            <div class="info-box-content">
+            <a href="register"><span class="info-box-text">Registration Details</span></a>
+            <span class="info-box-number"><?=$count_slider?></span>
+              <span class="info-box-number"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
 
         <!-- fix for small devices only -->
         <div class="clearfix visible-sm-block"></div>
@@ -235,7 +232,9 @@
             <span class="info-box-icon bg-green"><i class="fas fa-chart-pie"></i></span>
 
             <div class="info-box-content">
-            <a href="<?=base_url('recent_work');?>"><span class="info-box-text">Recent Works</span></a>
+            <a href="pr-classification"><span class="info-box-text">Classification List</span></a>
+            <span class="info-box-number"><?=$count_talent?></span>
+              <span class="info-box-number"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -243,6 +242,7 @@
         </div>
        
       </div>
+
 
 
 
