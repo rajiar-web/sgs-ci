@@ -86,7 +86,7 @@
                      foreach($products as $ind=>$p)
                      {
                         if($ind<9) { ?>
-                     <div class="col-12 col-lg-4 col-md-12 my-3" style="width: auto;">
+                     <div class="col-12 col-lg-4 col-md-12 my-3">
                         <a href="<?=base_url()?>product-detail/<?=$p->p_slug?>">
                            <div class="card w-100">
                               <div class="product-image d-flex">
@@ -108,25 +108,16 @@
                      
                   </div>
                </div>
+
+
+
+
                <?php 
                      if(!empty($products))
                      { ?>
                <div class="col-12 d-flex justify-content-end">
                   <nav aria-label="...">
-                     <ul class="pagination">
-                        <li class="page-item disabled">
-                           <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <?php for($l=1;$l<=$page_count;$l++)
-                        {?>
-                        <li class="page-item <?=($l==1)?'active':''?>"><a class="page-link" href="#"><?=$l?></a></li>
-
-                        <?php } ?>
-
-                        <li class="page-item">
-                           <a class="page-link" href="#">Next</a>
-                        </li>
-                     </ul>
+                        <?=$this->pagination->create_links();?>
                   </nav>
                </div>
 
@@ -168,6 +159,20 @@
          });
       </script>        
         <?php $this->load->view('front/inc/scripts');?>
+
+      <script>
+          $( document ).ready(function() {
+            $('.page-item a').each(function() {
+              $(this).attr('class', 'page-link');
+            });
+            
+            $('.pagination a').each(function() {
+              $(this).attr('class', 'page-link');
+            });
+
+            
+          });
+        </script>
         
     </body>
 </html>
