@@ -63,7 +63,7 @@ $route['service-detail/(:any)'] = 'Home/service_detail/$1';
 
 $route['index-form-action'] ='Home/index_contact_act';
 $route['contact-form-action'] ='Home/contact_act';
-
+$route['newsletter-action'] ='Home/news_act';
 
 //start
 
