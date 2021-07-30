@@ -43,100 +43,63 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-            <a href="add-slider">
-            <button type="button" class="btn-md cat-btn btn-primary pull-right" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-Add</button></a>
-              <h3 class="card-title">Slider
+            
+              <h3 class="card-title">Set Attribute
               
               </h3>
               
             </div>
             <!-- /.card-header -->
             <div class="card-body" id="menu_tbl_div">
-              
+            <?=form_open('',array("id"=>"aform"));?>  
+            <input type="hidden" id="cid" name="cid" value="<?php echo $id; ?>">
+            <button type="submit" class="btn cat-btn btn-primary" style="float: right">Update</button>  
 
-            <table id="slider_list" >  
+
+            <!-- <table id="attribute_list" >   -->
+            <table class="table table-bordered">  
        <thead>
         <tr>
         <th>No</th>
-        <th>Image</th>
-        <th>Title</th>
-        <th>Description</th> 
-        <th>Original Price</th>
-        <th>Discount Price</th>
-        <th>URL</th>
-        <th>Offer</th>
-        <th>Status</th> 
-        <th>Action</th> 
+        <th></th>
+        <th>Item</th>
+        <th>Answer</th>
         </tr>
     </thead>
     <tbody>
-        
-   
-        
-         <?php if(!empty($records))
+      
+    <?php if(!empty($records))
                   {
+                    
                     
                      $i=1;
                     foreach($records as $index=>$r)
                     {
-                     $img = '';
-                     $images = $r->s_image;
-                      if(!empty($images))
-                      {
-                       
-                        $pathinfo = pathinfo($images);
-                        if(file_exists('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']))
-                        {
-                          $pp = base_url('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']);
-                          $img = '<img src="'.$pp.'">';
-                        }
-                        else
-                        {
-                          $pp = base_url('assets/front/img/slider/'.$images);
-                          $img = '<img class="zoom" src="'.$pp.'" width="60" height="60">';
-                        }
-
-                      } 
-                 
+            
+               
                       ?>
-
-
-                                                  
-                                                 
-
-                      <tr>
-                      <td><?=$i++;?></td>
-                      <td><?=$img;?></td>
-                      <td><?=$r->s_title; ?></td>
-                      <td><?=$r->s_desc; ?></td>
-                      <td><?=$r->s_original_price; ?></td>
-                      <td><?=$r->s_discount_price; ?></td>
-                      <td><?=$r->s_url; ?></td>
-                      <td><?=$r->s_offer; ?></td>
-                      <td><?=($r->s_status=='1'?'active':'inactive');?></td>
-                        
+        
+<tr>
+                        <td><?=$i++;?></td>
+                        <td><input type="checkbox" name="attribute[]" <?php if(array_key_exists($r->a_id,$prcateg) && ($prcateg[$r->a_id]!='') ) {echo 'checked'; } else { echo '';} ?>  value="<?=$r->a_id;?>"></td>
+                        <td><?=$r->a_attribute;?></td>
                        
-                        
+                        <td>  <input type="text" class="form-control" id="answer[]" name="answer[<?=$r->a_id;?>]" placeholder="Enter Answer" value="<?php if(array_key_exists($r->a_id,$prcateg)) {echo $prcateg[$r->a_id]; } else { echo '';} ?>"></td>
                        
-                        <td>  <a href="add-slider/<?=$r->s_id;?>"  class="btn edit-cat btn-info" title="Edit"> <i class="fa fa-edit"></i></a>
+                     
                          
-                     <a href="javascript:void(0)" id="<?=$r->s_id;?>" class="btn del-slider  btn-danger" title="Delete"> <i class="fa fa-trash"></i></a>
-                   
-                     </td>
-                           
                       
                         
                       </tr>
                       <?php
-                     
                     }
-                  }
+                    }
+                  
                 ?>
     </tbody>
 </table> 
 
-
+</form>
           
 
 
@@ -167,7 +130,7 @@ Add</button></a>
 
 <?php $this->load->view('admin/inc/scripts');?>
 <script src="<?=admin_custom_js();?>common.js"></script>
-<script src="<?=admin_custom_js();?>slider.js"></script>
+<script src="<?=admin_custom_js();?>products.js"></script>
 
  
  <!-- DataTables -->
@@ -175,12 +138,12 @@ Add</button></a>
 <script src="<?=admin();?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function() {
-    $('#slider_list').DataTable();
+    //$('#attribute_list').DataTable();
   
 });
-</script> 
+</script>  -->
 
 </body>
 

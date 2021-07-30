@@ -7,12 +7,12 @@ $(document).ready(function(){
           $(".cat-btn").hide();
           var baseurl   = $("#base").val();
           var form_data = $("#cform").serializeArray();
-          form_data.push({name: 'desc', value: CKEDITOR.instances.desc.getData()});  
+         // form_data.push({name: 'desc', value: CKEDITOR.instances.desc.getData()});  
              $.ajax({
                   type:'POST',
                   dataType:'json',
               
-                url:baseurl+'slider-action',
+                url:baseurl+'featured-products-action',
                   data:form_data,
                  
                   success:function(data)
@@ -24,7 +24,7 @@ $(document).ready(function(){
                       if(data.res == 1)
                        { 
                           success(data.msg);
-                          setTimeout(function(){ window.location=baseurl+'slider'; }, 700);
+                          setTimeout(function(){ window.location=baseurl+'featured-products'; }, 700);
                        }
                        else
                     {
@@ -62,7 +62,7 @@ $(document).ready(function(){
                
                  form_data.append('file', file_data);
                  $.ajax({
-                     url : baseurl+'slider-image', 
+                     url : baseurl+'featured-products-image', 
                      type: "POST",
                      dataType:'json',
                      data: form_data,
@@ -92,8 +92,8 @@ $(document).ready(function(){
  
          });
 
-         $(document).on('click','.del-slider',function(){
-            $('.main-card-title').html('Delete Slider');
+         $(document).on('click','.del-featured-products',function(){
+            $('.main-card-title').html('Delete Featured Products ');
            var id = $(this).attr('id');
           
            alertify.confirm("Are you sure ?.",
@@ -104,7 +104,7 @@ $(document).ready(function(){
                   
                    form_data.append('id', id);
                    $.ajax({
-                           url : baseurl+'delete-slider',
+                           url : baseurl+'delete-featured-products',
                            type : 'post',
                            data : form_data,
                            cache: false,
@@ -130,13 +130,7 @@ $(document).ready(function(){
              },
              function(){
                alertify.error('Canceled');
-             }).set({title:"Confirm delete Slider"}).set({labels:{ok:'Delete', cancel: 'Cancel'}});
+             }).set({title:"Confirm delete Featured Product"}).set({labels:{ok:'Delete', cancel: 'Cancel'}});
         });
  
 
-
-        
-
-
-
-        

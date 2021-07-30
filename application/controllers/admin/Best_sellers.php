@@ -2,7 +2,7 @@
 //ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Slider_controller extends CI_Controller 
+class Best_sellers extends CI_Controller 
 {
 
 	function __construct()
@@ -17,46 +17,43 @@ class Slider_controller extends CI_Controller
        
 	}
 	
-    function slider()
+    function best_sellers()
 	{
         
-        $query = $this->db->get("tbl_slider"); 
+        $query = $this->db->get("home_best_sellers"); 
         $data['records'] = $query->result();
-		$data['breadcrumb'] = array("title"=>"Slider","links"=>array("Home"=>"#","Slider"=>"#"));
-		$this->load->view('admin/slider_list',$data); 
+		$data['breadcrumb'] = array("title"=>"Best sellers","links"=>array("Home"=>"#","Best sellers"=>"#"));
+		$this->load->view('admin/best_sellers_list',$data); 
 	}
 	
 
-	public function add_slider($id='')
+	public function add_best_sellers($id='')
 	{ 
-       
-        
+      
         if($id!='')
 		{
          
-            $data['records']=$this->Main->getDetailedData('*','tbl_slider',array('s_id'=>$id));
+            $data['records']=$this->Main->getDetailedData('*','home_best_sellers',array('id'=>$id));
 			 
 		}
-         $data['breadcrumb'] = array("title"=>"Add Slider","links"=>array("Home"=>"#","Add Slider"=>"#"));
+         $data['breadcrumb'] = array("title"=>"Add Best sellers","links"=>array("Home"=>"#","Add Best sellers"=>"#"));
 	
-		$this->load->view('admin/add_slider',$data); 
+		$this->load->view('admin/add_best_sellers',$data); 
 
 
          
     }
 	
-    function slider_action()
+    function best_sellers_action()
 	{
 	
         $this->load->library('form_validation');
           
-        $this->form_validation->set_rules('imgname','Slider Image','required');
+        $this->form_validation->set_rules('imgname','Product Image','required');
         $this->form_validation->set_rules('title','Title','required');
-        $this->form_validation->set_rules('desc','Description','required');
         $this->form_validation->set_rules('original','Original Price','required|numeric');
         $this->form_validation->set_rules('discount','Discount Price','required|numeric');
-        $this->form_validation->set_rules('url','URL','required|callback_validate_url');
-		$this->form_validation->set_rules('offer','Offer','required');
+      
         
   
         
@@ -76,13 +73,11 @@ class Slider_controller extends CI_Controller
         
 		
 			    $sId = $this->input->post('cid');
-                $param['s_image'] = $this->input->post('imgname');
-                $param['s_title'] = $this->input->post('title');
-                $param['s_desc'] = $this->input->post('desc');
-                $param['s_discount_price'] =$this->input->post('discount');
-                $param['s_original_price'] =$this->input->post('original');
-                $param['s_url'] = $this->input->post('url');
-				$param['s_offer'] = $this->input->post('offer');
+                $param['image'] = $this->input->post('imgname');
+                $param['title'] = $this->input->post('title');
+                $param['dis_rate'] = $this->input->post('discount');
+                $param['org_rate'] = $this->input->post('original');
+              
         
         
         
@@ -90,10 +85,10 @@ class Slider_controller extends CI_Controller
 				{
 				
 					
-					if($this->Main->insert($param,"tbl_slider"))
-						$res = array("res"=>1,"msg"=>'Slider Added');
+					if($this->Main->insert($param,"home_best_sellers"))
+						$res = array("res"=>1,"msg"=>'Best sellers Added');
 					else
-						$res = array("res"=>0,"msg"=>'Failed to add Slider');
+						$res = array("res"=>0,"msg"=>'Failed to add Best sellers');
 				}
 				else
 				{
@@ -101,10 +96,10 @@ class Slider_controller extends CI_Controller
 
 
 					
-					if($this->Main->update_slider($param,$sId))
-						$res = array("res"=>1,"msg"=>'Slider Edited');
+					if($this->Main->update($param,'home_best_sellers',array('id'=>$sId)))
+						$res = array("res"=>1,"msg"=>'Best sellers Edited');
 					else
-						$res = array("res"=>0,"msg"=>'Failed to edit Slider');
+						$res = array("res"=>0,"msg"=>'Failed to edit Best sellers');
 
 				}
 			
@@ -116,18 +111,18 @@ class Slider_controller extends CI_Controller
 	
 
 
-   function slider_delete()
+   function best_sellers_delete()
 	{
 		 $id = $this->input->post('id');
 		
 		if(!empty($id))
 		{
 			
-				if($this->Main->delete_slider($id))
-					$res = array("res"=>1,"msg"=>'Slider deleted');
+				if($this->Main->delete('home_best_sellers',array('id'=>$id)) )
+					$res = array("res"=>1,"msg"=>'Best sellers deleted');
 				
 				else
-					$res = array("res"=>0,"msg"=>'Failed to delete Slider');
+					$res = array("res"=>0,"msg"=>'Failed to delete Best sellers');
 		}
 		else
 			$res = array("res"=>0,'msg'=>'Id not found');
@@ -141,7 +136,7 @@ class Slider_controller extends CI_Controller
 		$this->load->library('image_lib');
 			if(!empty($_FILES['file']['name']))
 			{ 
-			$path = 'assets/front/img/slider/';
+			$path = 'assets/front/assets/img/';
 			$uploadPath = './'.$path;
 	        if (!is_dir($uploadPath))
 	        {
@@ -195,27 +190,9 @@ class Slider_controller extends CI_Controller
         
    }
 
-   function validate_url($url) 
-   {
-       if(!empty($url))
-       {
-          
-           if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url)) 
-           {
-               $this->form_validation->set_message("validate_url","Invalid URL");
-               $res = array("res"=>0,"msg"=>'Invalid URL');
-               return FALSE;
-           } 
-           else 
-           {
-               return TRUE;
-           }
-       }
-   
-   }
+
 
    
-
 	
 }
 

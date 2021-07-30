@@ -43,10 +43,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-            <a href="add-slider">
-            <button type="button" class="btn-md cat-btn btn-primary pull-right" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-Add</button></a>
-              <h3 class="card-title">Slider
+            
+              <h3 class="card-title">Registration Details
               
               </h3>
               
@@ -55,18 +53,16 @@ Add</button></a>
             <div class="card-body" id="menu_tbl_div">
               
 
-            <table id="slider_list" >  
+            <table id="register_list" >  
        <thead>
         <tr>
         <th>No</th>
+        <th>First Name</th>
+        <th>Last Name</th> 
+        <th>Email ID</th>
+        <th>Phone No</th>
         <th>Image</th>
-        <th>Title</th>
-        <th>Description</th> 
-        <th>Original Price</th>
-        <th>Discount Price</th>
-        <th>URL</th>
-        <th>Offer</th>
-        <th>Status</th> 
+        <th>Status</th>
         <th>Action</th> 
         </tr>
     </thead>
@@ -80,50 +76,23 @@ Add</button></a>
                      $i=1;
                     foreach($records as $index=>$r)
                     {
-                     $img = '';
-                     $images = $r->s_image;
-                      if(!empty($images))
-                      {
-                       
-                        $pathinfo = pathinfo($images);
-                        if(file_exists('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']))
-                        {
-                          $pp = base_url('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']);
-                          $img = '<img src="'.$pp.'">';
-                        }
-                        else
-                        {
-                          $pp = base_url('assets/front/img/slider/'.$images);
-                          $img = '<img class="zoom" src="'.$pp.'" width="60" height="60">';
-                        }
-
-                      } 
+                     
                  
                       ?>
-
-
-                                                  
-                                                 
-
                       <tr>
                       <td><?=$i++;?></td>
-                      <td><?=$img;?></td>
-                      <td><?=$r->s_title; ?></td>
-                      <td><?=$r->s_desc; ?></td>
-                      <td><?=$r->s_original_price; ?></td>
-                      <td><?=$r->s_discount_price; ?></td>
-                      <td><?=$r->s_url; ?></td>
-                      <td><?=$r->s_offer; ?></td>
-                      <td><?=($r->s_status=='1'?'active':'inactive');?></td>
+                      <td><?=$r->name; ?></td>
+                      <td><?=$r->last_name; ?></td>
+                      <td><?=$r->email; ?></td>
+                      <td><?=$r->contact; ?></td>
+                      <td></td>
+                        <td><?=($r->user_status=='1'?'active':'inactive');?></td>
                         
                        
                         
                        
-                        <td>  <a href="add-slider/<?=$r->s_id;?>"  class="btn edit-cat btn-info" title="Edit"> <i class="fa fa-edit"></i></a>
-                         
-                     <a href="javascript:void(0)" id="<?=$r->s_id;?>" class="btn del-slider  btn-danger" title="Delete"> <i class="fa fa-trash"></i></a>
-                   
-                     </td>
+                        <td><a href="javascript:void(0)" id="<?=$r->user_id;?>" class="btn view-cat btn-success" title="View<?=$r->name;?>"><i class="fa fa-eye"></i></a> 
+                        <a href="javascript:void(0)" id="<?=$r->user_id;?>" class="btn del-register  btn-danger" title="Delete"> <i class="fa fa-trash"></i></a></td>
                            
                       
                         
@@ -164,10 +133,29 @@ Add</button></a>
 </div>
 
 
-
+<div class="modal" tabindex="-1" role="dialog" id="catModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title main-modal-title text-info">Register details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="catModalBody">
+        <p align="center"><i class="fa fa-spin fa-spinner"></i></p>
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
 <?php $this->load->view('admin/inc/scripts');?>
 <script src="<?=admin_custom_js();?>common.js"></script>
-<script src="<?=admin_custom_js();?>slider.js"></script>
+<script src="<?=admin_custom_js();?>register.js"></script>
 
  
  <!-- DataTables -->
@@ -177,7 +165,7 @@ Add</button></a>
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#slider_list').DataTable();
+    $('#register_list').DataTable();
   
 });
 </script> 
