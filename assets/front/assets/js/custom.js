@@ -221,4 +221,10 @@ function increaseValue() {
       var baseurl   = $("#base").val();
       document.location = baseurl+'/user-logout';
       })
+$(document).on('click','.ctmain',function()
+{
+  var slug = $(this).attr('rel');
+  var baseurl   = $("#base").val();
+  document.location = baseurl+'cat-detail/'+slug;
 
+})
