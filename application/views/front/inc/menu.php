@@ -79,8 +79,7 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                              
                            </li>
                            <li class="nav-item">
-                           
-                              <a href="" class="cart">
+                              <a href="<?=base_url();?>cart-page" class="cart">
                               <i class="fas fa-cart-arrow-down"></i>
                               <span class="badge rounded-pill badge-notification bg-danger">0</span>
                               </a>
@@ -109,7 +108,7 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                         <a class="nav-link sign-in" href="#"><i class="far fa-user mx-2"></i></a>
                      </li>
                      <li class="nav-item">
-                        <a href="" class="cart">
+                        <a href="<?=base_url();?>cart-page" class="cart">
                         <span class="badge rounded-pill badge-notification bg-danger">0</span>
                         <i class="fas fa-cart-arrow-down"></i>
                         </a>
