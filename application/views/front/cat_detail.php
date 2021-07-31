@@ -14,7 +14,7 @@
       <section class="banner-detail-page">
          <div class="container">
             <div class="row">
-               <h2 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900"><?=$main_cat?>e</h2>
+               <h2 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900"><?=$main_cat?></h2>
             </div>
          </div>
       </section>
@@ -50,10 +50,7 @@
                                  <a href="<?=base_url()?>cat-detail/<?=$sc['c_slug']?>" class="ctgaChild"><?=$sc['c_category']?></a>
                               </li>
                               <?php } ?>
-                              
-                              
-
-                           </ul>
+                               </ul>
                            <?php } ?>
                         </li>
                         <?php } ?>
