@@ -42,11 +42,7 @@
 		</li>
 		<hr />
 		<li class="ctgli">
-
-			<a href="<?=base_url();?>user-logout" class="ctga" id="my-order">
-
 			<a class="ctga clslogout" id="my-order">
-
 				Logout
 			</a>
 		</li>

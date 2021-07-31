@@ -1,5 +1,5 @@
 <?php $contact = getcontact();
-	$con=$contact[0]; 
+   $con=$contact[0]; 
    $cat = getcategory();
 ?>
      <section class="top-banner" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900">
@@ -39,28 +39,8 @@
 $sss = $this->session->get_userdata("lg_user");
 if(!empty($sss['lg_user']['user_id']))
 {
-   $user_id = enc($sss['lg_user']['user_id'] ,'d');
-   $cond = array('o.o_r_id'=>$user_id);
-   $chk_pr_cart = $this->Main->getDetailedData('c.*,o.*','tbl_order o',$cond,null,null,array('c.c_p_id','asc'),array(array('tbl_cart c','c.c_o_id=o.o_id','left')));
-   if(!empty($chk_pr_cart))
-   {
-      $count_cart = count($chk_pr_cart);
-   }
-   else
-   {
-      $count_cart = 0;
-   }
+$user_id = enc($sss['lg_user']['user_id'] ,'d');
 }
-else if(!empty($this->session->get_userdata("guest_cart")['guest_cart']))
-{
-   $g_cart = $this->session->get_userdata("guest_cart")['guest_cart'];
-   $count_cart = count($g_cart);
-}
-else
-{
-   $count_cart = 0;
-}
-// print_r($count_cart);exit;
 ?>
 
       <header>
@@ -90,19 +70,15 @@ else
                               else
                               { ?>
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-profile"><i class="far fa-user mx-2"></i><?=!empty($sss['lg_user']['name'])?$sss['lg_user']['name']:""?></a>
-
-                              <?php
-
                                  <a class="nav-link sign-out" href="<?=base_url();?>user-logout"><i class="fa fa-sign-out"></i>Sign Out</a>
                                  <?php
-
                               }
                               ?>
                            </li>
                            <li class="nav-item">
-                              <a href="<?=base_url()?>cart-page" class="cart">
+                              <a href="" class="cart">
                               <i class="fas fa-cart-arrow-down"></i>
-                              <span class="badge rounded-pill badge-notification bg-danger"><?=$count_cart?></span>
+                              <span class="badge rounded-pill badge-notification bg-danger">0</span>
                               </a>
                            </li>
                         </ul>

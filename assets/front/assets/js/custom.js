@@ -139,10 +139,6 @@ $( document ).ready(function() {
 
 
 
-
-
-// /////////////////////////////////////
-
 function increaseValue() {
    var value = parseInt(document.getElementById('number').value, 10);
    value = isNaN(value) ? 0 : value;
@@ -158,8 +154,7 @@ function increaseValue() {
    document.getElementById('number').value = value;
    }
 
-<<<<<<< HEAD
-=======
+
 
   $(document).on('click','.email-btn',function(){
      
