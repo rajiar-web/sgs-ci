@@ -350,6 +350,40 @@ class Home extends CI_Controller
 	public function user_profile()
 	{
 		// print_r($this->session->get_userdata("lg_user")['lg_user']['name']);exit;
+		$data['cart_list'] =array();
+        $sss = $this->session->get_userdata("lg_user");
+        if(!empty($sss['lg_user']['user_id']))
+        {
+            $user_id = enc($sss['lg_user']['user_id'] ,'d');
+            $cond = array('o.o_r_id'=>$user_id);
+            $chk_pr_cart = $this->Main->getDetailedData('c.*,o.*,p.*','tbl_order o',$cond,null,null,array('c.c_p_id','asc'),array(array('tbl_cart c','c.c_o_id=o.o_id','left'),array('tbl_products p','p.p_id=c.c_p_id','left')));
+            // p($chk_pr_cart);
+            if(!empty($chk_pr_cart))
+            {
+                foreach($chk_pr_cart as $cpc)
+                {
+                    $info['c_totprice'] = $cpc->c_totprice;
+                    $info['c_discount'] = $cpc->c_discount;
+                    $info['c_to_mrp'] = $cpc->c_totprice + $cpc->c_discount;
+                    $info['c_qty'] = $cpc->c_qty;
+                    $info['p_title'] = $cpc->p_title;
+                    $info['p_image'] = $cpc->p_image;
+                    $info['p_slug'] = $cpc->p_slug;
+
+                    $info['p_original_price'] = $cpc->p_original_price;
+                    $info['p_discound_price'] = $cpc->p_discound_price;
+
+                    $info['o_subtotal'] = $cpc->o_subtotal;
+                    $info['o_id'] = $cpc->o_id;
+
+                    $info['p_id'] = $cpc->p_id;
+
+                    array_push($data['cart_list'],$info);
+                }
+            }
+
+            // p($data['cart_list']);
+        }
 		$sss = $this->session->get_userdata("lg_user");
 		if(!empty($sss['lg_user']['user_id']))
 		{
