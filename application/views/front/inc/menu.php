@@ -59,7 +59,7 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                      <div class="d-none d-md-flex">
                         <!-- Left links -->
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
-                           <li class="nav-item mx-3 mx-xl-5 mx-lg-3 mx-md-3">
+                           <li class="nav-item">
                               <?php
                               if(empty($user_id))
                               { ?>
@@ -70,7 +70,7 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                               else
                               { ?>
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-profile"><i class="far fa-user mx-2"></i><?=!empty($sss['lg_user']['name'])?$sss['lg_user']['name']:""?></a>
-                                 <li class="nav-item mx-3 mx-xl-5 mx-lg-3 mx-md-3">
+                                 <li class="nav-item">
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-logout"><i class="fas fa-sign-out-alt mx-2"></i>Sign Out</a>
                                  </li>
                                  <?php
