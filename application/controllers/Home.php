@@ -475,6 +475,7 @@ class Home extends CI_Controller
 		 else
             {			   
                $sss = $this->session->get_userdata("lg_user");
+			  // print_r($sss);
                $r_id = enc($sss['lg_user']['user_id'] ,'d');
 
 			   $add_data['add_status'] = '2';
