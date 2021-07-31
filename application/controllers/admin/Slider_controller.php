@@ -123,7 +123,7 @@ class Slider_controller extends CI_Controller
 		if(!empty($id))
 		{
 			
-				if($this->Main->delete_slider($id))
+				if($this->Main->delete_sliderr($id))
 					$res = array("res"=>1,"msg"=>'Slider deleted');
 				
 				else

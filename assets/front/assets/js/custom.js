@@ -219,3 +219,8 @@ function increaseValue() {
 
     })
  
+
+    $(document).on('click','.clslogout',function(){
+      var baseurl   = $("#base").val();
+      document.location = baseurl+'/user-logout';
+      })

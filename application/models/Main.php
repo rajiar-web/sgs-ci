@@ -958,4 +958,189 @@ function getContactData($id)
 	}
 
 
+//category
+function delete_category($id)
+{
+     $this->db->where('c_id', $id);
+     $this->db->delete('tbl_category');
+     return true;
+}
+function update_category($param,$sId)
+  {
+    
+    $this->db->where("c_id",$sId);
+    return $this->db->update("tbl_category",$param);
+  }
+
+  //products
+function delete_products($id)
+{
+     $this->db->where('p_id', $id);
+     $this->db->delete('tbl_products');
+     return true;
+}
+function update_products($param,$sId)
+  {
+    
+    $this->db->where("p_id",$sId);
+    return $this->db->update("tbl_products",$param);
+  }
+
+
+  //slider
+function delete_sliderr($id)
+{
+     $this->db->where('s_id', $id);
+     $this->db->delete('tbl_slider');
+     return true;
+}
+function update_slider($param,$sId)
+  {
+    
+    $this->db->where("s_id",$sId);
+    return $this->db->update("tbl_slider",$param);
+  }
+
+  //registration
+  function delete_register($id)
+{
+     $this->db->where('user_id', $id);
+     $this->db->delete('user');
+     return true;
+}
+
+
+function getRegisterData($id)
+{
+  
+  $this->db->select('*');
+  $this->db->from('user');
+  $this->db->where("user_id",$id);
+  $query = $this->db->get();
+  return $query->row(); 
+}
+
+//singleuser
+// function getSingleRegister($id)
+// {
+// $this->db->select('*');
+// $this->db->from('tbl_register');
+// $this->db->where("r_id",$id);
+// $query = $this->db->get();
+// return $query->row(); 
+// }
+
+//singleuseremail
+// function getSingleRegisterbyemail($id)
+// {
+// $this->db->select('*');
+// $this->db->from('tbl_register');
+// $this->db->where("r_email",$id);
+// $this->db->where("r_status!='0'",null);
+// $query = $this->db->get();
+// return $query->row(); 
+// }
+
+//updateuserstatus
+// function update_userotpstatus($param,$sId)
+// {
+
+// $this->db->where("r_id",$sId);
+// return $this->db->update("tbl_register",$param);
+// }
+
+
+//attributes
+function delete_attributes($id)
+{
+ $this->db->where('a_id', $id);
+ $this->db->delete('tbl_products_attributes');
+ return true;
+}
+function update_attributes($param,$sId)
+{
+
+$this->db->where("a_id",$sId);
+return $this->db->update("tbl_products_attributes",$param);
+}
+
+//product classification
+function delete_classification($id)
+{
+ $this->db->where('pc_id', $id);
+ $this->db->delete('tbl_product_classification');
+ return true;
+}
+function update_classification($param,$sId)
+{
+
+$this->db->where("pc_id",$sId);
+return $this->db->update("tbl_product_classification",$param);
+}
+
+
+//main contact
+function update_main($param,$id)
+{
+
+$this->db->where("mc_id",$id);
+return $this->db->update("tbl_main_contact",$param);
+}
+
+function getMainContactData($id)
+{
+$this->db->select('*');
+$this->db->from('tbl_main_contact');
+$this->db->where("mc_id",$id);
+$query = $this->db->get();
+return $query->row(); 
+}
+
+function getProducts()
+{
+$this->db->select('t1.*,t2.c_category,t2.c_id');
+$this->db->from('tbl_products t1');
+$this->db->join('tbl_category t2','t1.p_category=t2.c_id',"left") ;
+$query = $this->db->get();
+return $query->result(); 
+
+}
+
+
+function getCategory()
+{
+$this->db->select('t1.*,t2.c_category as c_name,t2.c_parent_id');
+$this->db->from('tbl_category t1');
+$this->db->join('tbl_category t2','t2.c_id=t1.c_parent_id',"left") ;
+$query = $this->db->get();
+return $query->result(); 
+
+}
+
+function loadClassificationProducts()
+{
+// $this->db->select(array("t1.*","t2.cl_id AS prId","t3.cl_id AS ltId","t4.cl_id AS pplId"));
+$this->db->select(array("t1.*","t2.cl_id AS pplId","t3.cl_id AS prId"));
+$this->db->from('tbl_products t1') ; 
+$this->db->join('product_classify t2','t1.p_id=t2.product_id AND t2.cl_status="1"',"left") ; 
+$this->db->join('product_classify t3','t1.p_id=t3.product_id AND t3.cl_status="2"',"left") ; 
+// $this->db->join('product_classify t4','t1.p_id=t4.product_id AND t4.cl_status="3"',"left") ; 
+$this->db->where("t1.p_status",'1');
+$this->db->order_by("t1.p_id","desc");
+$q=$this->db->get();
+return $q->result(); 
+}
+
+
+
+
+
+
+
+
+
+
+  
+
+
 }

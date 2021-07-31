@@ -65,10 +65,12 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                               { ?>
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-login"><i class="far fa-user mx-2"></i>Sign In / Sign Up</a>
                               <?php
-                              }
+  
+}
                               else
                               { ?>
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-profile"><i class="far fa-user mx-2"></i><?=!empty($sss['lg_user']['name'])?$sss['lg_user']['name']:""?></a>
+                                 <a class="nav-link sign-out" href="<?=base_url();?>user-logout"><i class="fa fa-sign-out"></i>Sign Out</a>
                                  <?php
                               }
                               ?>

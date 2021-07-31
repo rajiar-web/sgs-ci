@@ -17,7 +17,7 @@
                <div class="col-12 mb-2 mb-lg-3" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="600">
                   <nav class="arrow-devider" aria-label="breadcrumb">
                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?=base_url();?>user-profile">Home</a></li>
+                        <!-- <li class="breadcrumb-item"><a href="<?=base_url();?>user-profile">Home</a></li> -->
                         <!-- <li class="breadcrumb-item active" aria-current="page"><a href="<?=base_url();?>checkout">Checkout</a></li> -->
                      </ol>
                   </nav>
@@ -198,15 +198,12 @@
                                              <h5 class="card-title mb-3">10D - Atlas Green Detergent 10%</h5>
                                              <div class="row row-cols-1 row-cols-sm-1 d-flex justify-content-center justify-content-md-between align-items-center">
                                                 <p class="card-text order-price mb-3"> £9.55 </p>
-                                                <a href="#" class="btn mb-4 cancel-btn"><i class="fas fa-redo me-2"></i> Cancel Order </a>
+                                                <!-- <a href="#" class="btn mb-4 cancel-btn"><i class="fas fa-redo me-2"></i> Cancel Order </a> -->
                                              </div>
                                           </div>
-                                             <div class="status">
-                                                <p class="status-order mb-0 dispatched d-flex justify-content-start justify-content-lg-end">Dispatched on Aug 28, 2020</p>
-                                                <p class="status-order d-flex justify-content-start justify-content-lg-end tracking-title">Your package arrived at the courier facility</p>
-                                                <p class="status-order d-flex justify-content-start justify-content-lg-end tracking-msg pb-3">Expected delivery: &nbsp;<span>Fri, 02 June 2021</span></p>
+                                           
 
-                                             <div class="position-relative mx-4 mx-xl-5 d-none d-sm-block">
+                                             <!-- <div class="position-relative mx-4 mx-xl-5 d-none d-sm-block">
                                                 <div class="progress" style="height: 1px;">
                                                   <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
@@ -215,7 +212,7 @@
                                                 <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill">Shipped</button>
                                                 <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill">Delivered</button>
                                              </div>
-                                             </div>
+                                             </div> -->
 
                                           </div>
                                         </div>
@@ -234,13 +231,10 @@
                                              <h5 class="card-title mb-3">10D - Atlas Green Detergent 10%</h5>
                                              <div class="row row-cols-1 row-cols-sm-1 d-flex justify-content-center justify-content-md-between align-items-center">
                                                 <p class="card-text order-price mb-3"> £9.55 </p>
-                                                <a href="#" class="btn mb-4 return-btn"><i class="fas fa-redo me-2"></i> Return </a>
+                                                <!-- <a href="#" class="btn mb-4 return-btn"><i class="fas fa-redo me-2"></i> Return </a> -->
                                              </div>
                                           </div>
-                                             <div class="status">
-                                                <p class="status-order delivered d-flex justify-content-start justify-content-lg-end">Delivered on Aug 28, 2020</p>
-                                                <p class="status-order-dic d-flex justify-content-start justify-content-lg-end">Your item has been delivered</p>
-                                             </div>
+                                           
                                           </div>
                                         </div>
                                       </div>
@@ -260,9 +254,7 @@
                                                 <p class="card-text order-price mb-3"> £9.55 </p>
                                              </div>
                                           </div>
-                                             <div class="status">
-                                                <p class="status-order cancelled d-flex justify-content-start justify-content-lg-end">Cancelled on Aug 28, 2020</p>
-                                             </div>
+                                           
                                           </div>
                                         </div>
                                       </div>
@@ -280,10 +272,10 @@
                                              <h5 class="card-title mb-3">10D - Atlas Green Detergent 10%</h5>
                                              <p class="card-text order-price mb-3"> £9.55 </p>
                                           </div>
-                                             <div class="status">
+                                             <!-- <div class="status">
                                                 <p class="status-order returned d-flex justify-content-start justify-content-lg-end">Returned</p>
                                                 <p class="status-order-dic d-flex justify-content-start justify-content-lg-end">You returned this order because you received a different product.</p>
-                                             </div>
+                                             </div> -->
                                           </div>
                                         </div>
                                       </div>
