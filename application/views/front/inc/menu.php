@@ -70,12 +70,16 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                               else
                               { ?>
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-profile"><i class="far fa-user mx-2"></i><?=!empty($sss['lg_user']['name'])?$sss['lg_user']['name']:""?></a>
-                                 <a class="nav-link sign-out" href="<?=base_url();?>user-logout"><i class="fa fa-sign-out"></i>Sign Out</a>
+                                 <li class="nav-item mx-3 mx-xl-5 mx-lg-3 mx-md-3">
+                                 <a class="nav-link sign-in" href="<?=base_url();?>user-logout"><i class="fas fa-sign-out-alt mx-2"></i>Sign Out</a>
+                                 </li>
                                  <?php
                               }
                               ?>
+                             
                            </li>
                            <li class="nav-item">
+                           
                               <a href="" class="cart">
                               <i class="fas fa-cart-arrow-down"></i>
                               <span class="badge rounded-pill badge-notification bg-danger">0</span>
