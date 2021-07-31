@@ -22,12 +22,10 @@
    <link rel="stylesheet" href="<?=admin_custom_css();?>custome.css"/>
    
 </head>
-<style>.login-page {background: #a5a4a0!important;}</style>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-  <h3>SGS</h3>
-    <!-- <a href="../../"><img src="<?=front_images();?>/logo.png" width="40%"></a> -->
+    <a href="<?=base_url()?>dashboard"><img src="<?=front_images();?>/logo.png" width="100%"></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -75,21 +73,7 @@
           <!-- /.col -->
         </div>
       </form>
-    <!--   <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div> -->
-      <!-- /.social-auth-links -->
 
-      <!--<p class="mb-1">-->
-      <!--  <a href="forgot-password.html">I forgot my password</a>-->
-      <!--</p>-->
-     
     </div>
     <!-- /.login-card-body -->
   </div>

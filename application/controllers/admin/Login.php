@@ -10,9 +10,6 @@ class Login extends CI_Controller {
     }
 	public function index()
 	{
-	    
-	   $categoryData = $this->Main->getDetailedData('t.c_category,t.c_slug,c.c_id as main_category_id,c.c_parent_id,c.c_category AS main_category,c.c_slug AS m_slug','tbl_category c',array('c.c_status'=>'1','c.c_in_menu'=>'1'),null,null,array('c.c_id','asc'),array(array('tbl_category t','c.c_id=t.c_parent_id','left')));
-      
 		if($this->session->userdata('user_log'))
 		{
 			redirect('dashboard');
@@ -87,6 +84,7 @@ class Login extends CI_Controller {
 
 	function change_password()
 	{
+		checkSess();
 		$query = $this->db->get("login"); 
 		$data['records'] = $query->result(); 
 		$data['breadcrumb'] = array("title"=>"Change password","links"=>array("Home"=>"#","Change password"=>"#"));
@@ -99,6 +97,7 @@ class Login extends CI_Controller {
 
 	function password_action()
 	{
+		checkSess();
 		$this->load->library('form_validation');
           
         $this->form_validation->set_rules('currentpassword','Current Password','required|trim');

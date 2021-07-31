@@ -84,7 +84,7 @@
                      foreach($products as $ind=>$p)
                      {
                         if($ind<9) { ?>
-                     <div class="col-12 col-lg-4 col-md-12 my-3 ">
+                     <div class="col-12 col-lg-4 col-md-12 my-3 d-flex">
                         <a href="<?=base_url()?>product-detail/<?=$p->p_slug?>">
                            <div class="card w-100">
                               <div class="product-image d-flex">
@@ -93,7 +93,7 @@
                               <div class="card-body">
                                  <h5 class="card-title"><?=$p->p_title?>
                                  </h5>
-                                 <h3 class="d-flex align-items-center justify-content-center justify-content-lg-start">£<?=$p->p_original_price?><span class="ms-3">£<?=$p->p_discound_price?></span></h3>
+                                 <h3 class="d-flex align-items-center justify-content-center justify-content-lg-start">£<?=$p->p_discound_price?><span class="ms-3">£<?=$p->p_original_price?></span></h3>
                               </div>
                            </div>
                         </a>
@@ -103,31 +103,25 @@
                      
                   </div>
                </div>
-     
 
-
-     
-
-              <div class="col-12 d-flex justify-content-end">
+               <div class="col-12 d-flex justify-content-end">
                   <nav aria-label="...">
-                     <?=$this->pagination->create_links();?>
-
-<!--                      <ul class="pagination">
+                     <ul class="pagination">
                         <li class="page-item disabled">
                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                         </li>
-                        <li class="page-item "><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item "><a class="page-link" href="#">3</a></li>
+                        <?php for($l=1;$l<=$page_count;$l++)
+                        {?>
+                        <li class="page-item <?=($l==1)?'active':''?>"><a class="page-link" href="#"><?=$l?></a></li>
+
+                        <?php } ?>
+
                         <li class="page-item">
                            <a class="page-link" href="#">Next</a>
                         </li>
-                     </ul> -->
-
+                     </ul>
                   </nav>
-               </div> 
-
-
+               </div>
             </div>
          </div>
       </section>
@@ -165,21 +159,6 @@
          });
       </script>        
         <?php $this->load->view('front/inc/scripts');?>
-
-
-        <script>
-          $( document ).ready(function() {
-            $('.page-item a').each(function() {
-              $(this).attr('class', 'page-link');
-            });
-            
-            $('.pagination a').each(function() {
-              $(this).attr('class', 'page-link');
-            });
-
-            
-          });
-        </script>
         
     </body>
 </html>

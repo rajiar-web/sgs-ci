@@ -782,6 +782,19 @@ input#number {
 	outline: none;
 }
 
+.product_base_quantity_cart {
+	text-align: center;
+	border: none;
+	border-top: 1px solid #707070;
+	border-bottom: 1px solid #707070;
+	margin: 0px;
+	width: 40px;
+	height: 50px;
+	font-size: 24px;
+	font-weight: bold;
+	outline: none;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;

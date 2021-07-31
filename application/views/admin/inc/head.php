@@ -27,6 +27,6 @@
    <link rel="stylesheet" href="<?=admin_custom_css();?>custome.css"/>
    <style>
     .layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*=navbar]) {
-      background-color: #080808;
+      background-color: #626b74;
   }
   </style>

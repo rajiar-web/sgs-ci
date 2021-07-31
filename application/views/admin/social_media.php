@@ -8,13 +8,6 @@
     <link rel="stylesheet" href="<?=admin();?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="<?=admin();?>plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.css">
     <link rel="stylesheet" href="<?=admin();?>plugins/bootstrap-tagsinput-latest/examples/assets/app.css">
-    
-
-
-
-
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <style>
     #cat_list td .btn
     {
@@ -55,7 +48,7 @@
                 <div class="card-body">
                 
                   <div class="row">
-                    <input type="hidden" id="cid" name="cid" value="<?php if (!empty($cinfo)){ echo ($cinfo[0]->mc_id); } ?>">
+                    <input type="hidden" id="cid" name="cid" value="<?php if (!empty($cinfo)){ echo ($cinfo[0]->c_id); } ?>">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="row">
@@ -115,7 +108,7 @@
                         ?>
                         
                         </table>
-                        <span id="email_error" class="validation-error"></span>
+                        <span id="sales_email_error" class="validation-error"></span>
                     </div>
                    
 
@@ -129,10 +122,7 @@
                 <div align="center">
                    <span id="spinner"><i class="fa fa-spin fa-spinner"></i></span>
                    <a href="javascript:void(0)" class="btn cat-btn btn-warning add-more-sm"><i class="fa fa-plus"></i> Add New</a>
-                 
                    <button type="submit" class="btn cat-btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
-                
-                   
                    </div>
                 </div>
               <?=form_close();?>
@@ -165,7 +155,7 @@
  <script src="<?=admin();?>plugins/bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.min.js"></script>
  <script src="<?=admin();?>plugins/bootstrap-tagsinput-latest/examples/assets/app.js"></script>
 <script src="<?=admin_custom_js();?>common.js"></script>
-<script src="<?=admin_custom_js();?>socialmedia.js"></script>
+<script src="<?=admin_custom_js();?>social_media.js"></script>
  <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
  <!-- DataTables -->
 <script src="<?=admin();?>plugins/datatables/jquery.dataTables.js"></script>

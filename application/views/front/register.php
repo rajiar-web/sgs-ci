@@ -14,11 +14,11 @@
             <section class="login">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
-                        <div class="col-11 col-lg-7">
+                        <div class="col-11 col-lg-8">
                             <h2 class="title-h2" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900">Login Now</h2>
                             <p class="mt-4 title-p" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1200">Get access to your Orders, Wishlist and Recommendations</p>
                         </div>
-                        <div class="col-11 col-lg-5" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1500">
+                        <div class="col-11 col-lg-4" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1500">
                             <div class="form-sec p-3 p-lg-5 ">
                                 <!-- Tabs navs -->
                                 <ul class="nav nav-tabs nav-fill mb-3 mb-lg-4" id="ex1" role="tablist">
