@@ -31,7 +31,7 @@
                         foreach($categoryData as $ind=>$cd)
                         { ?>
                         <li class="ctgli">
-                           <a href="<?=base_url()?>cat-detail/<?=$cd['slug']?>" rel="<?=$cd['slug']?>" class="ctga ctmain">
+                           <a href="<?=base_url()?>cat-detail/<?=$cd['slug']?>" class="ctga">
                               <div class="ok"></div>
                               <i class="ti-layout"></i>
                               <?=$cd['cat']?>

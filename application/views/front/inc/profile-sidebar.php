@@ -14,14 +14,14 @@
 			</a>
 			<ul class="ctgulChild">
 				<li class="ctgliChild">
-					<a  class="ctgaChild" id="pro-info">Profile Information</a>
+					<a href="" class="ctgaChild" id="pro-info">Profile Information</a>
 				</li>
 				<li class="ctgliChild">
-					<a class="ctgaChild" id="manage-add"> Manage Addresses</a>
+					<a href="" class="ctgaChild" id="manage-add"> Manage Addresses</a>
 				</li>
 			</ul>
 		</li>
-		<!-- <li class="ctgli">
+		<li class="ctgli">
 			<a href="javascript:void(0);" class="ctga ">
 			<i class="ti-write"></i>
 			MY STUFF
@@ -29,10 +29,10 @@
 			</a>
 			<ul class="ctgulChild">
 				<li class="ctgliChild">
-					<a  class="ctgaChild" id="my-coupon">My Coupons</a>
+					<a href="" class="ctgaChild" id="my-coupon">My Coupons</a>
 				</li>
 			</ul>
-		</li> -->
+		</li>
 		<li class="ctgli">
 			<a href="javascript:void(0);" class="ctga" id="my-order">
 				<div class="ok"></div>
@@ -42,7 +42,7 @@
 		</li>
 		<hr />
 		<li class="ctgli">
-			<a class="ctga clslogout" id="my-order">
+			<a href="<?=base_url();?>user-logout" class="ctga" id="my-order">
 				Logout
 			</a>
 		</li>

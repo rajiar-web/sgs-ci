@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="<?=front_css();?>style.css" />
 <link rel="stylesheet" href="<?=front_css();?>style-cart.css" />
 <link href="<?=front_css();?>aos.css" rel="stylesheet">
-<link rel="stylesheet" href="<?=front_css();?>search_pr.css" />
 
 
 <link rel="stylesheet" href="<?=alertify_css();?>alertify.min.css">

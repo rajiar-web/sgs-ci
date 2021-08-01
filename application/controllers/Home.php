@@ -240,8 +240,51 @@ class Home extends CI_Controller
 	                $l_id = $this->db->insert_id();
                     $data1['add_user'] = $l_id;
                     $this->db->insert('tbl_address',$data1);
-        	      
-        	        $res = array("res"=>1,"msg"=>"OTP send to mail","l_id"=>enc($l_id));
+
+        	           $guest_order = $this->session->userdata('guest_order');
+                       $guest_cart = $this->session->userdata('guest_cart');
+
+                       if(!empty($guest_order) && !empty($guest_cart)){
+                        $this->db->trans_start();
+                        $orderdata['o_r_id'] = $l_id;
+                        $orderdata['o_status'] = $guest_order[0]['o_status'];;
+                        $orderdata['o_subtotal'] = $guest_order[0]['o_subtotal'];
+                        $orderdata['o_pro_discount'] = $guest_order[0]['o_pro_discount'];
+                        $orderdata['o_tax'] = $guest_order[0]['o_tax'];
+                        $orderdata['o_grandtotal'] = $guest_order[0]['o_grandtotal'];
+                        $orderdata['o_shipping'] = $guest_order[0]['o_shipping'];
+                        $orderdata['o_promocode'] = $guest_order[0]['o_promocode'];
+                        $orderdata['o_discount'] = $guest_order[0]['o_discount'];
+                         
+                        $c_o_id = $this->Main->insert($orderdata,'tbl_order');
+                         if(!empty($c_o_id)){
+
+                        $guest_order[0]['o_id'] = $c_o_id;
+                        $this->session->set_userdata('guest_order',$guest_order);
+
+                        foreach ($guest_cart as $gucart) {
+                            $cartdata['c_o_id'] = $c_o_id;
+                            $cartdata['c_p_id'] = $gucart['c_p_id'];
+                            $cartdata['c_mrp'] = $gucart['c_mrp'];
+                            $cartdata['c_price'] = $gucart['c_price'];
+                            $cartdata['c_qty'] = $gucart['c_qty'];
+                            $cartdata['c_discount'] = $gucart['c_discount'];
+                            $cartdata['c_totprice'] = $gucart['c_totprice'];
+
+                            $cartdata_new[] = $cartdata;
+                        }
+
+                         $this->Main->batch_insert($cartdata_new,'tbl_cart');
+                        }
+                         $this->db->trans_complete();
+                        if($this->db->trans_status() === TRUE)
+                          $res = array("res"=>1,"msg"=>"OTP send to mail","l_id"=>enc($l_id));
+                        else
+                          $res = array("res"=>0,"msg"=>"something went wrong");
+
+                       }
+                       else
+        	             $res = array("res"=>1,"msg"=>"OTP send to mail","l_id"=>enc($l_id));
         	   }
         	   else
         	   {
@@ -328,8 +371,21 @@ class Home extends CI_Controller
                     $data['username'] = $email;
                     $data['r_unique'] = $this->input->post('r_id');
         	        if($this->Main->update_userotpstatus($data,$r_id))
-        	        {
-        	            $res = array("res"=>1,"msg"=>"Registration success",);
+        	        {   
+
+        	           $user_data = $this->Main->getData('tbl_register',array('r_id'=>$r_id));
+                       if(!empty($user_data)){
+
+                        $sessdata['name'] = $user_data[0]->r_first_name;
+                        $sessdata['username'] =$user_data[0]->username;
+                        $sessdata['user_id'] = $user_data[0]->r_unique;
+
+                        $this->session->set_userdata("lg_user",$sessdata);
+                        
+                       }
+                       
+                       $res = array("res"=>1,"msg"=>"Registration success");
+
         	        }
         	        else
                     {
@@ -350,40 +406,6 @@ class Home extends CI_Controller
 	public function user_profile()
 	{
 		// print_r($this->session->get_userdata("lg_user")['lg_user']['name']);exit;
-		$data['cart_list'] =array();
-        $sss = $this->session->get_userdata("lg_user");
-        if(!empty($sss['lg_user']['user_id']))
-        {
-            $user_id = enc($sss['lg_user']['user_id'] ,'d');
-            $cond = array('o.o_r_id'=>$user_id);
-            $chk_pr_cart = $this->Main->getDetailedData('c.*,o.*,p.*','tbl_order o',$cond,null,null,array('c.c_p_id','asc'),array(array('tbl_cart c','c.c_o_id=o.o_id','left'),array('tbl_products p','p.p_id=c.c_p_id','left')));
-            // p($chk_pr_cart);
-            if(!empty($chk_pr_cart))
-            {
-                foreach($chk_pr_cart as $cpc)
-                {
-                    $info['c_totprice'] = $cpc->c_totprice;
-                    $info['c_discount'] = $cpc->c_discount;
-                    $info['c_to_mrp'] = $cpc->c_totprice + $cpc->c_discount;
-                    $info['c_qty'] = $cpc->c_qty;
-                    $info['p_title'] = $cpc->p_title;
-                    $info['p_image'] = $cpc->p_image;
-                    $info['p_slug'] = $cpc->p_slug;
-
-                    $info['p_original_price'] = $cpc->p_original_price;
-                    $info['p_discound_price'] = $cpc->p_discound_price;
-
-                    $info['o_subtotal'] = $cpc->o_subtotal;
-                    $info['o_id'] = $cpc->o_id;
-
-                    $info['p_id'] = $cpc->p_id;
-
-                    array_push($data['cart_list'],$info);
-                }
-            }
-
-            // p($data['cart_list']);
-        }
 		$sss = $this->session->get_userdata("lg_user");
 		if(!empty($sss['lg_user']['user_id']))
 		{
@@ -509,7 +531,6 @@ class Home extends CI_Controller
 		 else
             {			   
                $sss = $this->session->get_userdata("lg_user");
-			  // print_r($sss);
                $r_id = enc($sss['lg_user']['user_id'] ,'d');
 
 			   $add_data['add_status'] = '2';
@@ -771,41 +792,5 @@ class Home extends CI_Controller
 			
 	    }
 			 echo json_encode($res);
-	}
-	public function searchinmenu()
-	{
-	    $this->load->library('form_validation');
-		$this->form_validation->set_rules('search_val','Some','required|trim');
-		 if(!$this->form_validation->run())
-            {
-    			$errors = $this->form_validation->error_array();
-    			$res = array("res"=>0,"errors"=>$errors);
-    			
-    		}
-		 else
-            {
-
-               $search_val = $this->input->post('search_val');
-			   $data =array();
-			   $data = $this->Main->search_query($search_val);
-			//    print_r($data[0]->p_slug);exit;
-
-			
-
-               if(!empty($data))
-               {
-					$url = "product-detail/".$data[0]->p_slug;
-					$res = array("res"=>1,"msg"=>"Your result is ready","result"=>($data),"slug"=>$url); 
-                   
-               }
-               else
-        	   {
-        	       $res = array("res"=>0,"msg"=>"not found any product");
-        	   }
-               
-            }
-            
-		echo json_encode($res);
-		
 	}
 }

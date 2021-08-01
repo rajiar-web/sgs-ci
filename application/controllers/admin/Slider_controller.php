@@ -17,155 +17,125 @@ class Slider_controller extends CI_Controller
        
 	}
 	
-    function slider()
+    function slider_list()
 	{
-        
-        $query = $this->db->get("tbl_slider"); 
-        $data['records'] = $query->result();
-		$data['breadcrumb'] = array("title"=>"Slider","links"=>array("Home"=>"#","Slider"=>"#"));
+		$data['plist'] = $this->Main->SliderList();
+		$data['breadcrumb'] = array("title"=>" Slider","links"=>array("Home"=>"#","Add Slider"=>"#"));
 		$this->load->view('admin/slider_list',$data); 
 	}
 	
 
 	public function add_slider($id='')
 	{ 
-       
-        
-        if($id!='')
+		if(!empty($id))
 		{
-         
-            $data['records']=$this->Main->getDetailedData('*','tbl_slider',array('s_id'=>$id));
-			 
+			$sliderdata = $this->Main->SliderOne($id);
+			$data['sliderdata'] = $sliderdata[0];
 		}
-         $data['breadcrumb'] = array("title"=>"Add Slider","links"=>array("Home"=>"#","Add Slider"=>"#"));
-	
-		$this->load->view('admin/add_slider',$data); 
+		else
+		{
+			$data['sliderdata'] ="";
+		}
+        $data['breadcrumb'] = array("title"=>"Add Slider","links"=>array("Home"=>"#","Add Slider"=>"#"));
+		//$data['mnulist'] = $this->Main->loadMenus();
+		// echo "<pre>";
+		// print_r($data['sliderdata']);exit;
+		$this->load->view('admin/slider',$data); 
 
 
          
     }
 	
-    function slider_action()
+    function addSlider()
 	{
 	
         $this->load->library('form_validation');
           
-        $this->form_validation->set_rules('imgname','Slider Image','required');
-        $this->form_validation->set_rules('title','Title','required');
-        $this->form_validation->set_rules('desc','Description','required');
-        $this->form_validation->set_rules('original','Original Price','required|numeric');
-        $this->form_validation->set_rules('discount','Discount Price','required|numeric');
-        $this->form_validation->set_rules('url','URL','required|callback_validate_url');
-		$this->form_validation->set_rules('offer','Offer','required');
-        
-  
+        $this->form_validation->set_rules('title','Title','required|trim');
+		$this->form_validation->set_rules('imgname','Slider Images','required');
+		$this->form_validation->set_rules('imgname2','Background Slider Images','required');
         
         if(!$this->form_validation->run())
         {
-            
+            // $errors = $this->form_validation->error_array();
+			// $res = array("res"=>0,"errors"=>$errors);
 			
 			$errors = $this->form_validation->error_array();
 			$res = array("res"=>0,"errors"=>$errors);
 		
 			
-		
+			//echo json_encode($res);
 		}
 	
         else
         {
         
+		//echo $this->input->post('description');
+		$data = array();
+		$sId = $this->input->post('sId');
+
+		$data['s_title'] = $this->input->post('title');
+		$img = $this->input->post('imgname');
+		if($img!='')
+		$sliderImg = $img;
+		if(!empty($sliderImg))
+			  $data['s_image'] = $sliderImg;
+			  
+		$img2 = $this->input->post('imgname2');
+		if($img2!='')
+		$sliderImg2 = $img2;
+		if(!empty($sliderImg2))
+			$data['s_bag_img'] = $sliderImg2;
 		
-			    $sId = $this->input->post('cid');
-                $param['s_image'] = $this->input->post('imgname');
-                $param['s_title'] = $this->input->post('title');
-                $param['s_desc'] = $this->input->post('desc');
-                $param['s_discount_price'] =$this->input->post('discount');
-                $param['s_original_price'] =$this->input->post('original');
-                $param['s_url'] = $this->input->post('url');
-				$param['s_offer'] = $this->input->post('offer');
-        
-        
-        
-				if(empty($sId))
-				{
-				
-					
-					if($this->Main->insert($param,"tbl_slider"))
-						$res = array("res"=>1,"msg"=>'Slider Added');
-					else
-						$res = array("res"=>0,"msg"=>'Failed to add Slider');
-				}
-				else
-				{
-					
-
-
-					
-					if($this->Main->update_slider($param,$sId))
-						$res = array("res"=>1,"msg"=>'Slider Edited');
-					else
-						$res = array("res"=>0,"msg"=>'Failed to edit Slider');
-
-				}
-			
-  
-			}
-			echo json_encode($res);
-		}
-	
-	
-
-
-   function slider_delete()
-	{
-		 $id = $this->input->post('id');
+		$data['s_status'] = '1';
 		
-		if(!empty($id))
+		if(is_numeric($sId))
 		{
-			
-				if($this->Main->delete_sliderr($id))
-					$res = array("res"=>1,"msg"=>'Slider deleted');
-				
-				else
-					$res = array("res"=>0,"msg"=>'Failed to delete Slider');
+			$this->db->where("s_id",$sId);
+            $this->db->update('vd_slider',$data);
 		}
 		else
-			$res = array("res"=>0,'msg'=>'Id not found');
-		echo json_encode($res);
+		{
+		$this->db->insert('vd_slider',$data);	
+		}
+		$res = array("res"=>1,"msg"=>'Slider Inserted');
+		//echo json_encode($res);
+		}
+	   echo json_encode($res);
+  
 	}
-
-    function image()
+	
+	function image()
 	{
 		$data = array();
 		$filepath ='';
 		$this->load->library('image_lib');
 			if(!empty($_FILES['file']['name']))
 			{ 
-			$path = 'assets/front/img/slider/';
+			$path = 'assets/front/assets/img/';
 			$uploadPath = './'.$path;
 	        if (!is_dir($uploadPath))
 	        {
 	            mkdir($uploadPath, 0755, TRUE);
-	        }
-			
+	        }	
 			$config['upload_path'] = $path;
 		    $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
 		    $config['max_size'] = '5024000'; // max_size in kb 
 			$config['file_name'] = $_FILES['file']['name'];
 			$file_name=$_FILES['file']['name']; 
+			$r_num=rand(10000,4);
 			$newfile_name= preg_replace('/[^A-Za-z0-9.]/', "", $file_name); 
-            $config['file_name'] = $newfile_name;
-            $new_name = time().$newfile_name;
-            $config['file_name'] = $new_name;
+			$config['file_name'] = $r_num.$newfile_name;
 		    // Load upload library 
 		    $this->load->library('upload',$config); 
 		    // File upload
 			    if($this->upload->do_upload('file'))
 			    { 
 			    	 $fileData = $this->upload->data();
-			    	 $this->resize_images($path,$fileData['file_name'],87,87);
-			         $data['path'] = $path.$fileData['file_name'];	
-			   		 $data['filename'] = $new_name;	
+					 $this->resize_images($path,$fileData['file_name'],1920,976);
+					 $this->resize_images($path,$fileData['file_name'],308,531);
+			   		 $data['path'] = $path.$fileData['file_name'];	
+			   		 $data['filename'] = $r_num.$newfile_name;	
 			   		
 			    }
 			    else
@@ -183,7 +153,7 @@ class Slider_controller extends CI_Controller
         $this->load->library('image_lib');
         $config['image_library'] = 'gd2';
         $config['source_image'] = './'.$path.$name;
-        $config['new_image'] = './'.$path.$h.'_'.$w.'_'.$name;
+        $config['new_image'] = './'.$path.$w.'_'.$h.'_'.$name;
         $config['create_thumb'] = FALSE;
         $config['maintain_ratio'] = FALSE;
         $config['width']     = $w;
@@ -192,30 +162,25 @@ class Slider_controller extends CI_Controller
         $this->image_lib->initialize($config);
         $this->image_lib->resize();
         
-        
    }
 
-   function validate_url($url) 
-   {
-       if(!empty($url))
-       {
-          
-           if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url)) 
-           {
-               $this->form_validation->set_message("validate_url","Invalid URL");
-               $res = array("res"=>0,"msg"=>'Invalid URL');
-               return FALSE;
-           } 
-           else 
-           {
-               return TRUE;
-           }
-       }
-   
-   }
 
-   
-
-	
+   function slider_delete()
+	{
+		 $id = $this->input->post('id');
+		
+		if(!empty($id))
+		{
+			
+				if($this->Main->delete_slider($id))
+					$res = array("res"=>1,"msg"=>'Slider deleted');
+					// $this->load->view('admin/reasons_list',$data); 
+				else
+					$res = array("res"=>0,"msg"=>'Failed to delete Slider');
+		}
+		else
+			$res = array("res"=>0,'msg'=>'Id not found');
+		echo json_encode($res);
+	}
 }
 

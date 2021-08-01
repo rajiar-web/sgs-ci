@@ -14,7 +14,7 @@
       <section class="banner-detail-page">
          <div class="container">
             <div class="row">
-                <h2 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900"><?=$main_cat?></h2>
+               <h2 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900"><?=$main_cat?>e</h2>
             </div>
          </div>
       </section>
@@ -31,7 +31,7 @@
                         foreach($categoryData as $ind=>$cd)
                         { ?>
                         <li class="ctgli">
-                           <a href="<?=base_url()?>cat-detail/<?=$cd['slug']?>" rel="<?=$cd['slug']?>" class="ctga ctmain">
+                           <a href="<?=base_url()?>cat-detail/<?=$cd['slug']?>" class="ctga">
                               <div class="ok"></div>
                               <i class="ti-layout"></i>
                               <?=$cd['cat']?>

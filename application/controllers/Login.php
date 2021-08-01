@@ -41,12 +41,57 @@ class Login extends CI_Controller {
                        $data['name'] = $r_array->r_first_name;
                 	   $data['username'] =$r_array->username;
                 	   $data['user_id'] = $r_array->r_unique;
+                      
+						$guest_order = $this->session->userdata('guest_order');
+						$guest_cart = $this->session->userdata('guest_cart');
 
-                	   
-                	   $this->session->set_userdata("lg_user",$data);
-                	   
-                	   $res = array("res"=>1,"msg"=>"successfully login");
-                       
+                        if(!empty($guest_order) && !empty($guest_cart)){
+                        $this->db->trans_start();
+                        $orderdata['o_r_id'] = $r_array->r_id;
+                        $orderdata['o_status'] = $guest_order[0]['o_status'];;
+                        $orderdata['o_subtotal'] = $guest_order[0]['o_subtotal'];
+                        $orderdata['o_pro_discount'] = $guest_order[0]['o_pro_discount'];
+                        $orderdata['o_tax'] = $guest_order[0]['o_tax'];
+                        $orderdata['o_grandtotal'] = $guest_order[0]['o_grandtotal'];
+                        $orderdata['o_shipping'] = $guest_order[0]['o_shipping'];
+                        $orderdata['o_promocode'] = $guest_order[0]['o_promocode'];
+                        $orderdata['o_discount'] = $guest_order[0]['o_discount'];
+                         
+                        $c_o_id = $this->Main->insert($orderdata,'tbl_order');
+                         if(!empty($c_o_id)){
+
+                            $guest_order[0]['o_id'] = $c_o_id;
+                            $this->session->set_userdata('guest_order',$guest_order);
+
+                        foreach ($guest_cart as $gucart) {
+                            $cartdata['c_o_id'] = $c_o_id;
+                            $cartdata['c_p_id'] = $gucart['c_p_id'];
+                            $cartdata['c_mrp'] = $gucart['c_mrp'];
+                            $cartdata['c_price'] = $gucart['c_price'];
+                            $cartdata['c_qty'] = $gucart['c_qty'];
+                            $cartdata['c_discount'] = $gucart['c_discount'];
+                            $cartdata['c_totprice'] = $gucart['c_totprice'];
+
+                            $cartdata_new[] = $cartdata;
+                        }
+
+                         $this->Main->batch_insert($cartdata_new,'tbl_cart');
+                        }
+                         $this->db->trans_complete();
+                         if ($this->db->trans_status() === TRUE){
+                            $this->session->set_userdata("lg_user",$data);
+
+                            $res = array("res"=>1,"msg"=>"successfully login");
+                         }
+                          else
+                             $res = array("res"=>0,"msg"=>"something went wrong");
+                       }
+						else
+						{
+                	       $this->session->set_userdata("lg_user",$data);
+                	       $res = array("res"=>1,"msg"=>"successfully login");
+						}
+                	                          
                    }
                    else
             	   {

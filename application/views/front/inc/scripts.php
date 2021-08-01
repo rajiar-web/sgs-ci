@@ -4,7 +4,6 @@
 <script type="text/javascript" src="<?=front_js();?>custom.js"></script>
 <script src="<?=front_js();?>aos.js"></script>
 <script src="<?=alertify_js();?>alertify.min.js"></script>
-<script type="text/javascript" src="<?=front_js();?>search.js"></script>
 <script>
     AOS.init();
 </script>
