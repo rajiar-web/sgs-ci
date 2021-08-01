@@ -27,9 +27,6 @@
                   <h2 class="text-center">Returning customers?</h2>
 
                   <div class="accordion mt-3 mb-5 mt-lg-4" id="accordionExample">
-                     <?php echo form_open('',array('id'=>'login2')) ?>
-
-
                      <div class="accordion-item">
                        <h2 class="accordion-header" id="headingOne">
                          <button class="accordion-button border-0 collapsed ps-0" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -40,18 +37,15 @@
                         <div class="accordion-body  py-2 py-lg-0">
                           <div class="d-flex justify-content-center">
 
-
-                        
-
                          <div class="accordion-body col-10" >
                             <div  id="key-pwd">
                            <div class="col">
                               <label for="username" class="form-label">Username </label>
-                              <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                              <input type="text" class="form-control" id="username" placeholder="Username">
                            </div>
                            <div class="col mt-3">
                               <label for="pwd" class="form-label">Password</label>
-                              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password">
+                              <input type="password" class="form-control" id="pwd" placeholder="Password">
                            </div>
                            <div class="form-check d-flex justify-content-center mt-4">
                               <input class="form-check-input me-2" type="checkbox" value="" id="remember-pwd">
@@ -60,14 +54,13 @@
                               </label>
                             </div>
                            <div class="col-12 text-center mt-3">
-                              <button type="submit" class="btn btn-login login2btn">Login</button>
-                              <div class="login2spinner"></div>
+                              <button class="btn btn-login">Login</button>
                            </div>
-<!--                            <div class="col-12 text-center mt-3">
+                           <div class="col-12 text-center mt-3">
                               <a href="#" id="forget-pwd">Lost your password?</a>
-                           </div> -->
                            </div>
-<!--                            <div  id="find-pwd" style="display: none;">
+                           </div>
+                           <div  id="find-pwd" style="display: none;">
                               <div class="col">
                                  <label for="forget-pwd" class="form-label">Enter Email Address </label>
                                  <input type="text" class="form-control" id="forget-pwd" placeholder="Email address">
@@ -75,16 +68,15 @@
                               <div class="col-12 text-center mt-4 mb-4">
                                  <button class="btn btn-login login-signup">Email me password</button>
                               </div>
-                           </div> -->
-                         </div>                
+                           </div>
+                         </div>
+
+                         
 
                         </div>
                         </div>
                        </div>
                      </div>
-                     <?php echo form_close(); ?>
-
-                     
                      <div class="accordion-item">
                        <h2 class="accordion-header" id="headingTwo">
                          <button class="accordion-button border-top collapsed ps-0" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" >
@@ -95,59 +87,51 @@
                          <div class="accordion-body bg-loginpage py-2 py-lg-4">
                            <div class="d-flex justify-content-center mb-lg-4">
                               <div class="accordion-body col-10">
-
-                                <?php echo form_open('',array('id'=>'reg2')) ?>
                                  <div id="register-otp">
                                  <div class="row row-cols-1 row-cols-lg-2">
                                     <div class="col">
                                        <label for="fname" class="form-label">First Name  </label>
-                                       <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name:">
+                                       <input type="text" class="form-control" id="fname" placeholder="First Name:">
                                     </div>
                                     <div class="col">
                                        <label for="lname" class="form-label">Last Name  </label>
-                                       <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name:">
+                                       <input type="text" class="form-control" id="lname" placeholder="Last Name:">
                                     </div>
                                     <div class="col">
-                                       <label for="ph_no" class="form-label  mt-3">Phone Number  </label>
-                                       <input type="text" class="form-control" name="ph_no" id="ph_no" placeholder="Phone Number:">
+                                       <label for="ph-no" class="form-label  mt-3">Phone Number  </label>
+                                       <input type="text" class="form-control" id="ph-no" placeholder="Phone Number:">
                                     </div>
                                     <div class="col">
-                                       <label for="r_email" class="form-label mt-3">Email address  </label>
-                                       <input type="text" class="form-control" name="r_email" id="r_email" placeholder="Email:">
+                                       <label for="email" class="form-label mt-3">Email address  </label>
+                                       <input type="text" class="form-control" id="email" placeholder="Email:">
                                     </div>
                                  </div>
                                  <div class="row mt-3">
                                     <div class="col">
-                                       <label for="address_one" class="form-label">Address</label>
-                                       <input type="text" class="form-control" name="address_one"  id="address_one" placeholder="Address line 1:">
-                                       <input type="text" class="form-control mt-3" name="address_two" id="address_two" placeholder="Address line 2:">
-                                       <input type="text" class="form-control mt-3" name="city" id="city" placeholder="City:">
-                                       <input type="text" class="form-control mt-3" name="state" id="state" placeholder="State/Province/Region:">
-                                       <input type="text" class="form-control mt-3" name="zip" id="zip" placeholder="ZIP:">
-                                       <input type="text" class="form-control mt-3 disable" name="r_country" id="r_country" value="United Kingdom" placeholder="United Kingdom:" disabled readonly>
-                                       <input type="password" class="form-control mt-3" name="password" id="password" placeholder="Create Password:">
+                                       <label for="address" class="form-label">Address</label>
+                                       <input type="text" class="form-control" id="" placeholder="Address line 1:">
+                                       <input type="text" class="form-control mt-3" id="" placeholder="Address line 2:">
+                                       <input type="text" class="form-control mt-3" id="" placeholder="City:">
+                                       <input type="text" class="form-control mt-3" id="" placeholder="State/Province/Region:">
+                                       <input type="text" class="form-control mt-3" id="" placeholder="ZIP:">
+                                       <input type="text" class="form-control mt-3 disable" id="" placeholder="United Kingdom:" disabled readonly>
+                                       <input type="password" class="form-control mt-3" id="" placeholder="Create Password:">
                                     </div>
                                     <div class="col-12 text-center mt-3 mt-lg-4">
-                                       <button type="submit" class="btn btn-login ripple-surface" id="register-btn">Next</button>
-                                       <div class="register-spinner"></div>
+                                       <button class="btn btn-login ripple-surface" id="register-btn">Next</button>
                                     </div>
                                  </div>
                                  </div>
-                                <?php echo form_close(); ?>
-                                <!--   -->
                                  <div class="col-12" id="register-otp-fld" style="display: none;">
                                     <div class="row mt-3">
-                                      <?php echo form_open('',array('id'=>'otp2form')) ?>
-                                      <input type="hidden" id="r_id" name="r_id" value="">
                                        <div class="col">
                                           <label for="otp" class="form-label">Enter OTP</label>
-                                          <input type="text" name="r_otp" id="r_otp" class="form-control" placeholder="OTP send to mail">
+                                          <input type="text" class="form-control" placeholder="OTP send to mail">
                                        </div>
                                        <div class="col-12 text-center mt-3 mt-lg-4">
-                                          <button type="submit" class="btn btn-login login-signup otpbutton">SIGN UP</button>
-                                          <div class="otp-spinner"></div>
+                                          <button class="btn btn-login login-signup"  id="signup-login" data-mdb-toggle="modal" data-mdb-target="#register" id="your-link">SIGN UP</button>
                                        </div>
-                                        <?php echo form_close(); ?>
+
 
                                           <!-- Modal -->
                                           <div class="modal fade confirm-msg" id="register" tabindex="-1" aria-labelledby="register" aria-hidden="true">
@@ -160,20 +144,16 @@
                                              </div>
                                           </div>
 
+
+
+
                                     </div>
                                  </div>
-
-
-
                               </div>
                              </div>
                          </div>
                        </div>
                      </div>
-                     
-
-
-
                    </div>
 
                </div>
@@ -346,10 +326,7 @@ foreach ($cart_list as $cart_item) {
                      </tbody>
                    </table>
                    <div class="col d-flex justify-content-lg-end justify-content-center">
-        <?php if(!empty($this->session->userdata('lg_user'))) { ?>
-                    <a class="btn btn-dark text-right mt-3 mt-lg-3 place-ordr" id="place-order" href="javascript:void(0)">Place order</a>
-                    <div class="place-order-spinner"></div>
-        <?php }else{ echo '<p>Please login for checkout</p>'; } ?>
+                     <button class="btn btn-dark text-right mt-3 mt-lg-3 place-ordr">Place order</button>
                   </div>
                </div>
 <?php } ?>
@@ -397,181 +374,7 @@ foreach ($cart_list as $cart_item) {
 
 
 <?php $this->load->view('front/inc/scripts');?>
-<script type="text/javascript">
-    
-$(document).on('submit','#login2',function(){
-  $(".login2btn").hide();
-  $(".login2spinner").html('<span class="spinner-border"></span>');
-  
-  var baseurl = $("#base").val();
-  var form_data = $('#login2').serialize();
 
-               $.ajax({
-                type:'POST',
-                dataType:'json',
-                url:baseurl+'login2-action',
-                data:form_data,
-                success:function(data)
-                { 
-                  $(".login2btn").show();
-                  $(".login2spinner").html('');  
-
-                  console.log(data);
-            
-                    if(data.res == 1)
-                    {
-                      alertify.success(data.msg);
-                      setTimeout(function(){ window.location.reload(); }, 700);
-                
-                    }
-                    else
-                    {
-                        if($.isEmptyObject(data.errors))
-                        {
-                            alertify.error(data.msg);
-                        }
-                        else
-                        {
-                            for(var key in data.errors)
-                            {
-                                var v = data.errors[key];
-                                alertify.error(v);
-    
-                            }
-                        }
-                    }
-                }
-            });
-
-  return false;
-});
-
-
-$(document).on('submit','#reg2',function(){
-  $("#register-btn").hide();
-  $(".register-spinner").html('<span class="spinner-border"></span>');
-  
-  var baseurl = $("#base").val();
-  var r_country = $("#r_country").val()
-  var form_data = $('#reg2').serializeArray();
-  form_data.push({'name':'r_country','value':r_country});
-
-               $.ajax({
-                type:'POST',
-                dataType:'json',
-                url:baseurl+'reg2-action',
-                data:form_data,
-                success:function(data)
-                {  
-                  $("#register-btn").show();
-                  $(".register-spinner").html('');  
-            
-                    if(data.res == 1)
-                    {
-                      alertify.success(data.msg);
-                      $("#r_id").val(data.l_id);
-                      $("#reg2").hide();
-                      $("#register-otp-fld").show();
-                
-                    }
-                    else
-                    {
-                        if($.isEmptyObject(data.errors))
-                        {
-                            alertify.error(data.msg);
-                        }
-                        else
-                        {
-                            for(var key in data.errors)
-                            {
-                                var v = data.errors[key];
-                                alertify.error(v);
-    
-                            }
-                        }
-                    }
-                }
-            });
-
-  return false;
-});
-
-$(document).on('submit','#otp2form',function(){
-  $(".otpbutton").hide();
-  $(".otp-spinner").html('<span class="spinner-border"></span>');
-  
-  var baseurl = $("#base").val();
-  var form_data = $('#otp2form').serializeArray();
-
-
-               $.ajax({
-                type:'POST',
-                dataType:'json',
-                url:baseurl+'otp2-action',
-                data:form_data,
-                success:function(data)
-                {   
-                  $(".otpbutton").show();
-                  $(".otp-spinner").html('');  
-            
-                    if(data.res == 1)
-                    {
-                      alertify.success(data.msg);
-                      setTimeout(function(){ window.location.reload(); }, 700);
-                    }
-                    else
-                    {
-                        if($.isEmptyObject(data.errors))
-                        {
-                            alertify.error(data.msg);
-                        }
-                        else
-                        {
-                            for(var key in data.errors)
-                            {
-                                var v = data.errors[key];
-                                alertify.error(v);
-    
-                            }
-                        }
-                    }
-                }
-            });
-
-  return false;
-});
-
-
-$(document).on('click','#place-order',function(){
-  $("#place-order").hide();
-  $(".place-order-spinner").html('<span class="spinner-border"></span>');
-  
-  var baseurl = $("#base").val();
-
-               $.ajax({
-                type:'POST',
-                dataType:'json',
-                url:baseurl+'place-order-action',
-                success:function(data)
-                {   
-                    if(data.res == 1)
-                    {
-                      alertify.success(data.msg);
-                      setTimeout(function(){ window.location.href=baseurl+"user-profile"; }, 700);
-                    }
-                    else
-                    {  
-                      alertify.error(data.msg);
-                    }
-                }
-            });
-
-  return false;
-});
-
-
-
-</script>
      
    </body>
 </html>
