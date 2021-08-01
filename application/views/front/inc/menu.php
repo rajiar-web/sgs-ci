@@ -39,9 +39,47 @@
 $sss = $this->session->get_userdata("lg_user");
 if(!empty($sss['lg_user']['user_id']))
 {
-$user_id = enc($sss['lg_user']['user_id'] ,'d');
+   $user_id = enc($sss['lg_user']['user_id'] ,'d');
+   $cond = array('o.o_r_id'=>$user_id);
+   $chk_pr_cart = $this->Main->getDetailedData('c.*,o.*','tbl_order o',$cond,null,null,array('c.c_p_id','asc'),array(array('tbl_cart c','c.c_o_id=o.o_id','left')));
+   if(!empty($chk_pr_cart))
+   {
+      $count_cart = count($chk_pr_cart);
+   }
+   else
+   {
+      $count_cart = 0;
+   }
+}
+else if(!empty($this->session->get_userdata("guest_cart")['guest_cart']))
+{
+   $g_cart = $this->session->get_userdata("guest_cart")['guest_cart'];
+   $count_cart = count($g_cart);
+}
+else
+{
+   $count_cart = 0;
+}
+
+$products = $this->Main->getDetailedData(array('p_title'),'tbl_products',null,null,null,array("p_id","desc"));
+if(!empty($products))
+{
+      $pr_array= array();
+      foreach($products as $pr)
+      {
+         array_push($pr_array,$pr->p_title);
+      }
+
+      $arr_prr= '';
+      foreach ($pr_array as $key => $value) 
+      {
+         if ($key > 0) $arr_prr.=',';
+         $arr_prr.=$value;
+      }
+
 }
 ?>
+<input type="hidden" id="prds_all" value='<?=$arr_prr?>' />
 
       <header>
          <div class="col-12" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1300">
@@ -52,9 +90,14 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                      <!-- Toggle button -->
                      <a class="navbar-brand" href="<?=base_url()?>"><img src="<?=front_images();?>logo.svg" alt=""></a>
                      <!-- Collapsible wrapper -->
-                     <form class="d-md-flex input-group w-50 form-search d-none">
-                        <input type="search" class="form-control" placeholder="Search Products" aria-label="Search" />
-                        <button class="btn btn-outline-primary search-btn" type="button" data-mdb-ripple-color="dark"><i class="fas fa-search"></i></button>
+                      <form class="d-md-flex input-group w-50 form-search d-none" id="searchform" autocomplete="off">
+                     <div class="autocomplete" style="width:92%;">
+                        
+                        <input type="text" name="searchinput" id="searchinput" name="myCountry" class="form-control" placeholder="Search Products" aria-label="Search">
+                     </div>
+                     <button class="btn btn-outline-primary search-btn" type="submit" data-mdb-ripple-color="dark"><i class="fas fa-search"></i></button>
+                        <!-- <input type="search" class="form-control" name="searchinput" id="searchinput" placeholder="Search Products" aria-label="Search" /> -->
+                        <!-- <button class="btn btn-outline-primary search-btn" type="submit" data-mdb-ripple-color="dark"><i class="fas fa-search"></i></button> -->
                      </form>
                      <div class="d-none d-md-flex">
                         <!-- Left links -->
@@ -82,7 +125,7 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                            
                               <a href="" class="cart">
                               <i class="fas fa-cart-arrow-down"></i>
-                              <span class="badge rounded-pill badge-notification bg-danger">0</span>
+                               <span class="badge rounded-pill badge-notification bg-danger"><?=$count_cart?></span>
                               </a>
                            </li>
                         </ul>

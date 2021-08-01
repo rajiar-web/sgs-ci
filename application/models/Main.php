@@ -1131,7 +1131,16 @@ $q=$this->db->get();
 return $q->result(); 
 }
 
-
+function search_query($slug)
+{
+    $this->db->select('t1.p_slug');
+    $this->db->from('tbl_products t1');
+    $this->db->join('tbl_category t2','t1.p_category=t2.c_id',"left") ; 
+    $this->db->where("t1.p_title",$slug);
+    // $this->db->where("(t1.p_title LIKE '%".$slug."%')", NULL, FALSE);
+    $q=$this->db->get();
+    return $q->result();
+}
 
 
 

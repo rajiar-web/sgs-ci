@@ -161,6 +161,8 @@ $route['imageservices']='admin/Services_controller/image';
 $route['services_list']= 'admin/Services_controller/services_list';
 $route['deleteservices']='admin/Services_controller/services_delete';
 
+$route['search-in-menu'] = 'Home/searchinmenu';
+
 
 
 

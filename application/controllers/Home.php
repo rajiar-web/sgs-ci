@@ -738,4 +738,40 @@ class Home extends CI_Controller
 	    }
 			 echo json_encode($res);
 	}
+	public function searchinmenu()
+	{
+	    $this->load->library('form_validation');
+		$this->form_validation->set_rules('search_val','Some','required|trim');
+		 if(!$this->form_validation->run())
+            {
+    			$errors = $this->form_validation->error_array();
+    			$res = array("res"=>0,"errors"=>$errors);
+    			
+    		}
+		 else
+            {
+
+               $search_val = $this->input->post('search_val');
+			   $data =array();
+			   $data = $this->Main->search_query($search_val);
+			//    print_r($data[0]->p_slug);exit;
+
+			
+
+               if(!empty($data))
+               {
+					$url = "product-detail/".$data[0]->p_slug;
+					$res = array("res"=>1,"msg"=>"Your result is ready","result"=>($data),"slug"=>$url); 
+                   
+               }
+               else
+        	   {
+        	       $res = array("res"=>0,"msg"=>"not found any product");
+        	   }
+               
+            }
+            
+		echo json_encode($res);
+		
+	}
 }
