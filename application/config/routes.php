@@ -97,7 +97,10 @@ $route['remove-cart-product'] = 'Cart/remove_from_cart';
 $route['add-to-cart-from-cart'] = 'Cart/add_to_cart_from_cart';
 
 $route['checkout'] = 'Checkout/index';
-
+$route['login2-action'] = 'Checkout/log2Action';
+$route['reg2-action'] = 'Checkout/reg2action';
+$route['otp2-action'] = 'Checkout/register_otp_confirm2';
+$route['place-order-action'] = 'Checkout/placeorderAction';
 
 
 
