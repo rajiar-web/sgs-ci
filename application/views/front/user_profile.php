@@ -189,7 +189,7 @@
                                  <div class="card mb-3 p-3 card-oredr-items">
                                     <div class="row g-0">
                                       <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                        <img src="<?=front_images()?>single-img-3.jpg" alt="..." class="img-fluid img-thumbnail order-product-img" />
+                                        <img src="<?=front_images()?>atlas-green-detergent.png" alt="..." class="img-fluid img-thumbnail order-product-img" />
                                       </div>
                                       <div class="col-md-10 d-flex align-items-center">
                                         <div class="card-body">
@@ -225,7 +225,7 @@
                                  <div class="card mb-3 p-3 card-oredr-items">
                                     <div class="row g-0">
                                       <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                        <img src="<?=front_images()?>single-img-3.jpg" alt="..." class="img-fluid img-thumbnail order-product-img" />
+                                        <img src="<?=front_images()?>atlas-green-detergent.png" alt="..." class="img-fluid img-thumbnail order-product-img" />
                                       </div>
                                       <div class="col-md-10 d-flex align-items-center">
                                         <div class="card-body">
@@ -249,7 +249,7 @@
                                  <div class="card mb-3 p-3 card-oredr-items">
                                     <div class="row g-0">
                                       <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                        <img src="<?=front_images()?>single-img-2.jpg" alt="..." class="img-fluid img-thumbnail order-product-img" />
+                                        <img src="<?=front_images()?>atlas-green-detergent.png" alt="..." class="img-fluid img-thumbnail order-product-img" />
                                       </div>
                                       <div class="col-md-10 d-flex align-items-center">
                                         <div class="card-body">
@@ -271,7 +271,7 @@
                                  <div class="card mb-3 p-3 card-oredr-items">
                                     <div class="row g-0">
                                       <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                        <img src="<?=front_images()?>single-img-2.jpg" alt="..." class="img-fluid img-thumbnail order-product-img" />
+                                        <img src="<?=front_images()?>atlas-green-detergent.png" alt="..." class="img-fluid img-thumbnail order-product-img" />
                                       </div>
                                       <div class="col-md-10 d-flex align-items-center">
                                         <div class="card-body">

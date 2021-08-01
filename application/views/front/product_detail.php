@@ -30,17 +30,32 @@
                     </div>
                     <div class="col-12 col-lg-7 mt-4 mt-lg-1 single-product-disc ps-3 ps-lg-5"  data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1200">
                         <h2 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1200"><?=$products->p_title?></h2>
-                        <h3 class="d-flex align-items-center justify-content-start justify-content-lg-start mb-1 mb-lg-4">£<?=$products->p_discound_price?><span class="ms-3">£<?=$products->p_original_price?></span></h3>
+                        <h3 class="d-flex align-items-center justify-content-start justify-content-lg-start mb-1 mb-lg-4" id="changr_price">£<?=$products->p_discound_price?><span class="ms-3">£<?=$products->p_original_price?></span></h3>
+                        
                         <form class="mb-3 mb-lg-5">
+                            <input type="hidden" name="product_id" id="product_id" value="<?=$products->p_id?>" />
+                            <input type="hidden" name="product_base_price" id="product_base_price" value="<?=$products->p_discound_price?>" />
+                            <input type="hidden" name="product_org_price" id="product_org_price" value="<?=$products->p_original_price?>" />
+                            <input type="hidden" name="product_tot_price" id="product_tot_price" value="" />
+                            <input type="hidden" name="product_tot_quantity" id="product_tot_quantity" value="" />
+                            <input type="hidden" name="product_dis_price" id="product_dis_price" value="" />
+                            
                             <div class="row">
                                 <div class="col-12 d-block d-md-flex align-items-center">
                                 <label for="qtynumber" class="me-0 me-md-4">QTY</label>
                                 <div class="">
                                     <div class="value-button border-end-0" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                    <input type="number" id="number" name="qtynumber" value="0" />
+                                    <input type="number" id="number" min="1" class="product_base_quantity" name="product_base_quantity" value="1" />
                                     <div class="value-button border-start-0" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
                                 </div>
-                                <button type="button" class="btn btn-primary qty-btn ms-0 ms-md-4 mt-3 mt-lg-0">Buy now</button>
+                                <span id="spinner" style="display:none;"><i class="fa fa-spin fa-spinner fa-2x"></i></span>
+                                <?php 
+                                if($pr_cart_status == 0)
+                                { ?>
+                                    <button type="button" class="btn btn-primary qty-btn ms-0 ms-md-4 mt-3 mt-lg-0" id="add_to_cart">Add To Cart</button>
+                                <?php } else { ?>
+                                    <a href="<?=base_url()?>cart-page"><button type="button" class="btn btn-primary qty-btn ms-0 ms-md-4 mt-3 mt-lg-0" id="go_to_cart">Go To Cart</button></a>
+                                <?php } ?>
                                 </div>
                             </div>
                         </form>
@@ -124,6 +139,7 @@
         <!-- footer Start -->
         <?php $this->load->view('front/inc/footer');?>   
         <?php $this->load->view('front/inc/scripts');?>
+        <script type="text/javascript" src="<?=front_js();?>cart.js"></script>
         
     </body>
 </html>
