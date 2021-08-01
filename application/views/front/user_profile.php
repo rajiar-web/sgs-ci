@@ -184,20 +184,24 @@
                               <h3>My Orders</h3>
                               <hr />
                            </div>
+                           <?php if(!empty($cart_list)) {
+                foreach($cart_list as $cl)
+                { ?>
+                          
                            <div class="col-12">
                               <div class="row">
                                  <div class="card mb-3 p-3 card-oredr-items">
                                     <div class="row g-0">
                                       <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                        <img src="<?=front_images()?>atlas-green-detergent.png" alt="..." class="img-fluid img-thumbnail order-product-img" />
+                                        <img src="<?=front_images().$cl['p_image']?>" alt="..." class="img-fluid img-thumbnail order-product-img" />
                                       </div>
                                       <div class="col-md-10 d-flex align-items-center">
                                         <div class="card-body">
                                            <div class="row row-cols-1 row-cols-lg-2">
                                           <div>
-                                             <h5 class="card-title mb-3">10D - Atlas Green Detergent 10%</h5>
+                                             <h5 class="card-title mb-3"><?=$cl['p_title']?></h5>
                                              <div class="row row-cols-1 row-cols-sm-1 d-flex justify-content-center justify-content-md-between align-items-center">
-                                                <p class="card-text order-price mb-3"> £9.55 </p>
+                                                <p class="card-text order-price mb-3"> £<?=$cl['c_totprice']?></p>
                                                 <!-- <a href="#" class="btn mb-4 cancel-btn"><i class="fas fa-redo me-2"></i> Cancel Order </a> -->
                                              </div>
                                           </div>
@@ -219,70 +223,9 @@
                                       </div>
                                     </div>
                                   </div>
-                                 <div class="card mb-3 p-3 card-oredr-items">
-                                    <div class="row g-0">
-                                      <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                        <img src="<?=front_images()?>atlas-green-detergent.png" alt="..." class="img-fluid img-thumbnail order-product-img" />
-                                      </div>
-                                      <div class="col-md-10 d-flex align-items-center">
-                                        <div class="card-body">
-                                           <div class="row row-cols-1 row-cols-lg-2">
-                                              <div>
-                                             <h5 class="card-title mb-3">10D - Atlas Green Detergent 10%</h5>
-                                             <div class="row row-cols-1 row-cols-sm-1 d-flex justify-content-center justify-content-md-between align-items-center">
-                                                <p class="card-text order-price mb-3"> £9.55 </p>
-                                                <!-- <a href="#" class="btn mb-4 return-btn"><i class="fas fa-redo me-2"></i> Return </a> -->
-                                             </div>
-                                          </div>
-                                           
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                 <div class="card mb-3 p-3 card-oredr-items">
-                                    <div class="row g-0">
-                                      <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                        <img src="<?=front_images()?>atlas-green-detergent.png" alt="..." class="img-fluid img-thumbnail order-product-img" />
-                                      </div>
-                                      <div class="col-md-10 d-flex align-items-center">
-                                        <div class="card-body">
-                                           <div class="row row-cols-1 row-cols-lg-2">
-                                              <div>
-                                             <h5 class="card-title mb-3">10D - Atlas Green Detergent 10%</h5>
-                                             <div class="row row-cols-1 row-cols-sm-1 d-flex justify-content-center justify-content-md-between align-items-center">
-                                                <p class="card-text order-price mb-3"> £9.55 </p>
-                                             </div>
-                                          </div>
-                                           
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                 <div class="card mb-3 p-3 card-oredr-items">
-                                    <div class="row g-0">
-                                      <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                        <img src="<?=front_images()?>atlas-green-detergent.png" alt="..." class="img-fluid img-thumbnail order-product-img" />
-                                      </div>
-                                      <div class="col-md-10 d-flex align-items-center">
-                                        <div class="card-body">
-                                           <div class="row row-cols-1 row-cols-lg-2">
-                                              <div>
-                                             <h5 class="card-title mb-3">10D - Atlas Green Detergent 10%</h5>
-                                             <p class="card-text order-price mb-3"> £9.55 </p>
-                                          </div>
-                                             <!-- <div class="status">
-                                                <p class="status-order returned d-flex justify-content-start justify-content-lg-end">Returned</p>
-                                                <p class="status-order-dic d-flex justify-content-start justify-content-lg-end">You returned this order because you received a different product.</p>
-                                             </div> -->
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                              </div>
-                           </div>
+                                
+                               <?php } }?>
+                                 
                         </div>
                      </div>
 
@@ -293,8 +236,8 @@
          </div>
       </section>
 
-		<!--Footer : Begin-->
-		<?php $this->load->view('front/inc/footer');?>
+    <!--Footer : Begin-->
+    <?php $this->load->view('front/inc/footer');?>
       <!-- Modal -->
       <div class="modal fade change-password" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">

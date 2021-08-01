@@ -123,7 +123,7 @@ if(!empty($products))
                            </li>
                            <li class="nav-item">
                            
-                              <a href="" class="cart">
+                                 <a href="<?=base_url();?>cart-page" class="cart">
                               <i class="fas fa-cart-arrow-down"></i>
                                <span class="badge rounded-pill badge-notification bg-danger"><?=$count_cart?></span>
                               </a>
@@ -152,8 +152,8 @@ if(!empty($products))
                         <a class="nav-link sign-in" href="#"><i class="far fa-user mx-2"></i></a>
                      </li>
                      <li class="nav-item">
-                        <a href="" class="cart">
-                        <span class="badge rounded-pill badge-notification bg-danger">0</span>
+                         <a href="<?=base_url();?>cart-page" class="cart">
+                        <span class="badge rounded-pill badge-notification bg-danger"><?=$count_cart?></span>
                         <i class="fas fa-cart-arrow-down"></i>
                         </a>
                      </li>
