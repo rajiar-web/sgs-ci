@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
- {
+class Dashboard extends CI_Controller {
 
 	
 	function __construct() 
@@ -12,18 +11,15 @@ class Dashboard extends CI_Controller
     }
 	public function index()
 	{
-		$q = $this->db->get('tbl_products');
-		$data['count_services'] =$q->num_rows();
-	
-		
-		$reviews = $this->db->get('user');
-		$data['count_slider'] =$reviews->num_rows();
-		
-		
-		$offers = $this->db->get('tbl_product_classification');
-		$data['count_talent'] =$offers->num_rows();	
-	
-	
+		$querycountmessage = $this->db->where('c_status !=','2');
+		$q = $this->db->get('vd_contact');
+		$data['count_message'] =$q->num_rows();
+		$querycountsearch = $this->db->where('s_status','1');
+		$qsearch = $this->db->get('vd_services');
+		$data['count_search'] =$qsearch->num_rows();
+		$querycountcompany = $this->db->where('status','1');
+		$qcompany = $this->db->get('vd_recent_works');
+		$data['count_company'] =$qcompany->num_rows();
 		$data['breadcrumb'] = array("title"=>"Dashboard","links"=>array("Dashboard"=>"#"));
 		$this->load->view('admin/dashboard',$data);
 	}

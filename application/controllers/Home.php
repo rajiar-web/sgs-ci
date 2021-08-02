@@ -25,7 +25,7 @@ class Home extends CI_Controller
 		$this->load->view('front/index',$data);
 	}
 
-	public function listing($id='')
+	public function listing()
 	{
 		$data['Active']='L';
 		$cond = array('m.c_status'=>'1');
@@ -58,52 +58,59 @@ class Home extends CI_Controller
            
         } 
         $data['categoryData'] = $category;
-		$data['products'] = $this->Main->getDetailedData(array('p_id','p_image','p_title','p_original_price','p_discound_price'),'tbl_products',null,null,null,array("p_id","desc"));
-
 		$data['products'] = $this->Main->getDetailedData(array('p_id','p_image','p_slug','p_title','p_original_price','p_discound_price'),'tbl_products',null,null,null,array("p_id","desc"));
 
-        $data['page_count'] = ceil(count($data['products'])/9);
-
-		$this->load->library('pagination');   
-		$total_rows = count($data['products']);   
-
-        $config['base_url'] = b().'listing';
-        $config['total_rows'] = $total_rows;
-		$config['per_page'] = 9;
-		$config['full_tag_open'] = '<ul class="pagination">';
-		$config['full_tag_close'] = '</ul>';            
-		$config['prev_link'] = 'Previous';
-		$config['prev_tag_open'] = '<li class="page-item">';
-		$config['prev_tag_close'] = '</li>';
-		$config['next_link'] = 'Next';
-		$config['next_tag_open'] = '<li class="page-item">';
-		$config['next_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
-		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li class="page-item">';
-		$config['num_tag_close'] = '</li>';
-
-
-	    $this->pagination->initialize($config);
-
-		$page = $id ? $id : 0;
-
-	    $data['products'] = $this->Main->getDetailedData(array('p_id','p_image','p_slug','p_title','p_original_price','p_discound_price'),'tbl_products',null,$config['per_page'],$page,array("p_id","desc"));
-
-	    $this->load->view('front/listing',$data);
+   		$data['page_count'] = ceil(count($data['products'])/9);
+		$this->load->view('front/listing',$data);
 	}
-
 
 
 	public function product_detail($slug)
 	{
 		$data['Active']='L';
 		$data['slug']=$slug;
+		$data['pr_cart_status']=0;
 
 		$cond = array('p_slug'=>$slug);
         $productData = $this->Main->getDetailedData(array('p_id','p_image','p_desc','p_category','p_offer','p_slug','p_title','p_original_price','p_discound_price'),'tbl_products',$cond,null,null,array("p_id","desc"));
    		$data['products'] = $productData[0];
 		$cat_id = $data['products']->p_category;
+		$product_id = $data['products']->p_id;
+
+		if(!empty($this->session->get_userdata("lg_user")['lg_user']['user_id']))
+        {
+			$sss = $this->session->get_userdata("lg_user");                
+            $r_id = enc($sss['lg_user']['user_id'] ,'d'); 
+			$cond = array('c.c_p_id'=>$product_id);
+			$chk_pr_cart = $this->Main->getDetailedData('c.*,o.*','tbl_order o',$cond,null,null,array('c.c_p_id','asc'),array(array('tbl_cart c','c.c_o_id=o.o_id','left')));
+			if(!empty($chk_pr_cart))
+			{
+				$data['pr_cart_status']=1;
+			}
+			else
+			{
+				$data['pr_cart_status']=0;
+			}
+			// print_r($data['pr_cart_status']);exit;
+		}
+		else if(!empty($this->session->get_userdata("guest_cart")['guest_cart']))
+		{
+		   $g_cart = $this->session->get_userdata("guest_cart")['guest_cart'];
+		   foreach($g_cart as $gc)
+		   {
+			   if($gc['c_p_id'] == $product_id)
+			   {
+				$data['pr_cart_status']=1;
+			   }
+
+		   }
+		//    print_r($product_id);
+		//    p($g_cart);
+		}
+		else
+		{
+			$data['pr_cart_status']=0;
+		}
 
 		// $cond1 = array('m.c_id'=>$cat_id);
         // $categoryData = $this->Main->getDetailedData('m.c_id as main_cat_id, m.c_category as main_cat','tbl_category m',$cond1,null,null,array('m.c_id','asc'));
@@ -114,7 +121,7 @@ class Home extends CI_Controller
 		$this->load->view('front/product_detail',$data);
 	}
 
-	public function cat_detail($slug,$id='')
+	public function cat_detail($slug)
 	{
 		$data['Active']='L';
 		$cond = array('m.c_status'=>'1');
@@ -156,39 +163,12 @@ class Home extends CI_Controller
 		$cond2 = array('p_category'=>$catm_id);
 		$data['products'] = $this->Main->getDetailedData(array('p_id','p_image','p_slug','p_title','p_original_price','p_discound_price'),'tbl_products',$cond2,null,null,array("p_id","desc"));
 		// print_r($data['products']);exit;
-		// if(!empty($data['products']))
-		// {
-		// 	$data['page_count'] = ceil(count($data['products'])/9);
-		// }
-
-
-		$this->load->library('pagination');   
-		$total_rows = count($data['products']);   
-
-        $config['base_url'] = b().'cat-detail/'.$slug;
-        $config['total_rows'] = $total_rows;
-		$config['per_page'] = 3;
-		$config['full_tag_open'] = '<ul class="pagination">';
-		$config['full_tag_close'] = '</ul>';            
-		$config['prev_link'] = 'Previous';
-		$config['prev_tag_open'] = '<li class="page-item">';
-		$config['prev_tag_close'] = '</li>';
-		$config['next_link'] = 'Next';
-		$config['next_tag_open'] = '<li class="page-item">';
-		$config['next_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
-		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li class="page-item">';
-		$config['num_tag_close'] = '</li>';
-
-
-	    $this->pagination->initialize($config);
-
-		$page = $id ? $id : 0;
-
-		$data['products'] = $this->Main->getDetailedData(array('p_id','p_image','p_slug','p_title','p_original_price','p_discound_price'),'tbl_products',$cond2,$config['per_page'],$page,array("p_id","desc"));
-
-	    $this->load->view('front/cat_detail',$data);
+		if(!empty($data['products']))
+		{
+			$data['page_count'] = ceil(count($data['products'])/9);
+		}
+   		
+		$this->load->view('front/cat_detail',$data);
 	}
 
 	public function register()
@@ -255,13 +235,56 @@ class Home extends CI_Controller
 
         	//    if( $this->send_otp($data,'Hello'.$data['name']))
 
-            if( $this->db->insert('tbl_register',$data))
+             if( $this->db->insert('tbl_register',$data))
 	            {
 	                $l_id = $this->db->insert_id();
                     $data1['add_user'] = $l_id;
                     $this->db->insert('tbl_address',$data1);
-        	      
-        	        $res = array("res"=>1,"msg"=>"OTP send to mail","l_id"=>enc($l_id));
+
+        	           $guest_order = $this->session->userdata('guest_order');
+                       $guest_cart = $this->session->userdata('guest_cart');
+
+                       if(!empty($guest_order) && !empty($guest_cart)){
+                        $this->db->trans_start();
+                        $orderdata['o_r_id'] = $l_id;
+                        $orderdata['o_status'] = $guest_order[0]['o_status'];;
+                        $orderdata['o_subtotal'] = $guest_order[0]['o_subtotal'];
+                        $orderdata['o_pro_discount'] = $guest_order[0]['o_pro_discount'];
+                        $orderdata['o_tax'] = $guest_order[0]['o_tax'];
+                        $orderdata['o_grandtotal'] = $guest_order[0]['o_grandtotal'];
+                        $orderdata['o_shipping'] = $guest_order[0]['o_shipping'];
+                        $orderdata['o_promocode'] = $guest_order[0]['o_promocode'];
+                        $orderdata['o_discount'] = $guest_order[0]['o_discount'];
+                         
+                        $c_o_id = $this->Main->insert($orderdata,'tbl_order');
+                         if(!empty($c_o_id)){
+
+                        $guest_order[0]['o_id'] = $c_o_id;
+                        $this->session->set_userdata('guest_order',$guest_order);
+
+                        foreach ($guest_cart as $gucart) {
+                            $cartdata['c_o_id'] = $c_o_id;
+                            $cartdata['c_p_id'] = $gucart['c_p_id'];
+                            $cartdata['c_mrp'] = $gucart['c_mrp'];
+                            $cartdata['c_price'] = $gucart['c_price'];
+                            $cartdata['c_qty'] = $gucart['c_qty'];
+                            $cartdata['c_discount'] = $gucart['c_discount'];
+                            $cartdata['c_totprice'] = $gucart['c_totprice'];
+
+                            $cartdata_new[] = $cartdata;
+                        }
+
+                         $this->Main->batch_insert($cartdata_new,'tbl_cart');
+                        }
+                         $this->db->trans_complete();
+                        if($this->db->trans_status() === TRUE)
+                          $res = array("res"=>1,"msg"=>"OTP send to mail","l_id"=>enc($l_id));
+                        else
+                          $res = array("res"=>0,"msg"=>"something went wrong");
+
+                       }
+                       else
+        	             $res = array("res"=>1,"msg"=>"OTP send to mail","l_id"=>enc($l_id));
         	   }
         	   else
         	   {
@@ -347,9 +370,22 @@ class Home extends CI_Controller
         	        $data['r_status'] = '1';
                     $data['username'] = $email;
                     $data['r_unique'] = $this->input->post('r_id');
-        	        if($this->Main->update_userotpstatus($data,$r_id))
-        	        {
-        	            $res = array("res"=>1,"msg"=>"Registration success",);
+        	       if($this->Main->update_userotpstatus($data,$r_id))
+        	        {   
+
+        	           $user_data = $this->Main->getData('tbl_register',array('r_id'=>$r_id));
+                       if(!empty($user_data)){
+
+                        $sessdata['name'] = $user_data[0]->r_first_name;
+                        $sessdata['username'] =$user_data[0]->username;
+                        $sessdata['user_id'] = $user_data[0]->r_unique;
+
+                        $this->session->set_userdata("lg_user",$sessdata);
+                        
+                       }
+                       
+                       $res = array("res"=>1,"msg"=>"Registration success");
+
         	        }
         	        else
                     {
@@ -370,6 +406,40 @@ class Home extends CI_Controller
 	public function user_profile()
 	{
 		// print_r($this->session->get_userdata("lg_user")['lg_user']['name']);exit;
+		$data['cart_list'] =array();
+        $sss = $this->session->get_userdata("lg_user");
+        if(!empty($sss['lg_user']['user_id']))
+        {
+            $user_id = enc($sss['lg_user']['user_id'] ,'d');
+            $cond = array('o.o_r_id'=>$user_id);
+            $chk_pr_cart = $this->Main->getDetailedData('c.*,o.*,p.*','tbl_order o',$cond,null,null,array('c.c_p_id','asc'),array(array('tbl_cart c','c.c_o_id=o.o_id','left'),array('tbl_products p','p.p_id=c.c_p_id','left')));
+            // p($chk_pr_cart);
+            if(!empty($chk_pr_cart))
+            {
+                foreach($chk_pr_cart as $cpc)
+                {
+                    $info['c_totprice'] = $cpc->c_totprice;
+                    $info['c_discount'] = $cpc->c_discount;
+                    $info['c_to_mrp'] = $cpc->c_totprice + $cpc->c_discount;
+                    $info['c_qty'] = $cpc->c_qty;
+                    $info['p_title'] = $cpc->p_title;
+                    $info['p_image'] = $cpc->p_image;
+                    $info['p_slug'] = $cpc->p_slug;
+
+                    $info['p_original_price'] = $cpc->p_original_price;
+                    $info['p_discound_price'] = $cpc->p_discound_price;
+
+                    $info['o_subtotal'] = $cpc->o_subtotal;
+                    $info['o_id'] = $cpc->o_id;
+
+                    $info['p_id'] = $cpc->p_id;
+
+                    array_push($data['cart_list'],$info);
+                }
+            }
+
+            // p($data['cart_list']);
+        }
 		$sss = $this->session->get_userdata("lg_user");
 		if(!empty($sss['lg_user']['user_id']))
 		{
@@ -495,6 +565,7 @@ class Home extends CI_Controller
 		 else
             {			   
                $sss = $this->session->get_userdata("lg_user");
+			  // print_r($sss);
                $r_id = enc($sss['lg_user']['user_id'] ,'d');
 
 			   $add_data['add_status'] = '2';
@@ -614,14 +685,7 @@ class Home extends CI_Controller
 		$data['service'] = $this->Homemodel->getServicepgae();
 		$this->load->view('front/services',$data);
 	}
-	public function service_detail($slug)
-	{
-		$data['Active']='S';
-		$data['c_slug']=$slug;
-		$data['service'] = $this->Homemodel->getServicepgae();
-		$data['service_dtl'] = $this->Homemodel->getOneService($slug);
-		$this->load->view('front/service_detail',$data);
-	}
+	
 	
 
 
@@ -764,52 +828,48 @@ class Home extends CI_Controller
 	    }
 			 echo json_encode($res);
 	}
-
-
-
-
-	function news_act()
+	public function searchinmenu()
 	{
-		$this->load->library('form_validation');
-		$this->form_validation->set_error_delimiters('<div style="color:red;" >', '</div>');
-		$this->form_validation->set_rules('email','Email','required|trim|valid_email');
-		
-		if(!$this->form_validation->run())
-        {    
-               $errors = $this->form_validation->error_array();
+	    $this->load->library('form_validation');
+		$this->form_validation->set_rules('search_val','Some','required|trim');
+		 if(!$this->form_validation->run())
+            {
+    			$errors = $this->form_validation->error_array();
     			$res = array("res"=>0,"errors"=>$errors);
-                      
-        }
-        else
-        {
+    			
+    		}
+		 else
+            {
+
+               $search_val = $this->input->post('search_val');
+			   $data =array();
+			   $data = $this->Main->search_query($search_val);
+			//    print_r($data[0]->p_slug);exit;
 
 			
-			
-			 $email = $this->input->post('email');  			 
-			 $param['nl_email']=$email;
-			if($this->Main->getDetailedData('*','tbl_newsletter',array('nl_email'=>$email)))
-			{
-				$res = array("res"=>0,"msg"=>'Email Already Exisiting');
-			}
-       else
-          {
 
-
-			if($this->Main->insert($param,'tbl_newsletter'))
-			{
-				
-				$res = array("res"=>1,"msg"=>'News letter Subscription Successfull.');
-				
-			}
-			else
-			{
-				$res = array("res"=>0,"msg"=>'something wrong');
-			}
-			
-			
-	    }
-	}	 
+               if(!empty($data))
+               {
+					$url = "product-detail/".$data[0]->p_slug;
+					$res = array("res"=>1,"msg"=>"Your result is ready","result"=>($data),"slug"=>$url); 
+                   
+               }
+               else
+        	   {
+        	       $res = array("res"=>0,"msg"=>"not found any product");
+        	   }
+               
+            }
+            
 		echo json_encode($res);
-
+		
+	}
+	public function Terms_of_use()
+	{
+		$this->load->view('front/terms_of_use');
+	}
+	public function Privacy_policy()
+	{
+		$this->load->view('front/privacy_policy');
 	}
 }

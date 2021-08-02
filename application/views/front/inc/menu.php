@@ -1,5 +1,5 @@
 <?php $contact = getcontact();
-	$con=$contact[0]; 
+   $con=$contact[0]; 
    $cat = getcategory();
 ?>
      <section class="top-banner" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="900">
@@ -39,9 +39,47 @@
 $sss = $this->session->get_userdata("lg_user");
 if(!empty($sss['lg_user']['user_id']))
 {
-$user_id = enc($sss['lg_user']['user_id'] ,'d');
+   $user_id = enc($sss['lg_user']['user_id'] ,'d');
+   $cond = array('o.o_r_id'=>$user_id);
+   $chk_pr_cart = $this->Main->getDetailedData('c.*,o.*','tbl_order o',$cond,null,null,array('c.c_p_id','asc'),array(array('tbl_cart c','c.c_o_id=o.o_id','left')));
+   if(!empty($chk_pr_cart))
+   {
+      $count_cart = count($chk_pr_cart);
+   }
+   else
+   {
+      $count_cart = 0;
+   }
+}
+else if(!empty($this->session->get_userdata("guest_cart")['guest_cart']))
+{
+   $g_cart = $this->session->get_userdata("guest_cart")['guest_cart'];
+   $count_cart = count($g_cart);
+}
+else
+{
+   $count_cart = 0;
+}
+
+$products = $this->Main->getDetailedData(array('p_title'),'tbl_products',null,null,null,array("p_id","desc"));
+if(!empty($products))
+{
+      $pr_array= array();
+      foreach($products as $pr)
+      {
+         array_push($pr_array,$pr->p_title);
+      }
+
+      $arr_prr= '';
+      foreach ($pr_array as $key => $value) 
+      {
+         if ($key > 0) $arr_prr.=',';
+         $arr_prr.=$value;
+      }
+
 }
 ?>
+<input type="hidden" id="prds_all" value='<?=$arr_prr?>' />
 
       <header>
          <div class="col-12" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1300">
@@ -52,31 +90,42 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                      <!-- Toggle button -->
                      <a class="navbar-brand" href="<?=base_url()?>"><img src="<?=front_images();?>logo.svg" alt=""></a>
                      <!-- Collapsible wrapper -->
-                     <form class="d-md-flex input-group w-50 form-search d-none">
-                        <input type="search" class="form-control" placeholder="Search Products" aria-label="Search" />
-                        <button class="btn btn-outline-primary search-btn" type="button" data-mdb-ripple-color="dark"><i class="fas fa-search"></i></button>
+                      <form class="d-md-flex input-group w-50 form-search d-none" id="searchform" autocomplete="off">
+                     <div class="autocomplete" style="width:90%;">
+                        
+                        <input type="text" name="searchinput" id="searchinput" name="myCountry" class="form-control" placeholder="Search Products" aria-label="Search">
+                     </div>
+                     <button class="btn btn-outline-primary search-btn" type="submit" data-mdb-ripple-color="dark"><i class="fas fa-search"></i></button>
+                        <!-- <input type="search" class="form-control" name="searchinput" id="searchinput" placeholder="Search Products" aria-label="Search" /> -->
+                        <!-- <button class="btn btn-outline-primary search-btn" type="submit" data-mdb-ripple-color="dark"><i class="fas fa-search"></i></button> -->
                      </form>
                      <div class="d-none d-md-flex">
                         <!-- Left links -->
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
-                           <li class="nav-item mx-3 mx-xl-5 mx-lg-3 mx-md-3">
+                           <li class="nav-item">
                               <?php
                               if(empty($user_id))
                               { ?>
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-login"><i class="far fa-user mx-2"></i>Sign In / Sign Up</a>
                               <?php
-                              }
+  
+}
                               else
                               { ?>
                                  <a class="nav-link sign-in" href="<?=base_url();?>user-profile"><i class="far fa-user mx-2"></i><?=!empty($sss['lg_user']['name'])?$sss['lg_user']['name']:""?></a>
+                                 <li class="nav-item">
+                                 <a class="nav-link sign-in" href="<?=base_url();?>user-logout"><i class="fas fa-sign-out-alt mx-2"></i>Sign Out</a>
+                                 </li>
                                  <?php
                               }
                               ?>
+                             
                            </li>
                            <li class="nav-item">
-                              <a href="" class="cart">
+                           
+                                 <a href="<?=base_url();?>cart-page" class="cart">
                               <i class="fas fa-cart-arrow-down"></i>
-                              <span class="badge rounded-pill badge-notification bg-danger">0</span>
+                               <span class="badge rounded-pill badge-notification bg-danger"><?=$count_cart?></span>
                               </a>
                            </li>
                         </ul>
@@ -103,8 +152,8 @@ $user_id = enc($sss['lg_user']['user_id'] ,'d');
                         <a class="nav-link sign-in" href="#"><i class="far fa-user mx-2"></i></a>
                      </li>
                      <li class="nav-item">
-                        <a href="" class="cart">
-                        <span class="badge rounded-pill badge-notification bg-danger">0</span>
+                         <a href="<?=base_url();?>cart-page" class="cart">
+                        <span class="badge rounded-pill badge-notification bg-danger"><?=$count_cart?></span>
                         <i class="fas fa-cart-arrow-down"></i>
                         </a>
                      </li>

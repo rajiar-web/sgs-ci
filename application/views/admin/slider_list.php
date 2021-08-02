@@ -43,10 +43,10 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-            <a href="add-slider">
-            <button type="button" class="btn-md cat-btn btn-primary pull-right" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-Add</button></a>
-              <h3 class="card-title">Slider
+            <!-- <a href="add-slider">
+            <button type="button" class="btn-md cat-btn btn-primary pull-right" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true" action="admin/add_slider"></i>
+Add</button></a> -->
+              <h3 class="card-title">Home
               
               </h3>
               
@@ -59,77 +59,86 @@ Add</button></a>
        <thead>
         <tr>
         <th>No</th>
-        <th>Image</th>
         <th>Title</th>
-        <th>Description</th> 
-        <th>Original Price</th>
-        <th>Discount Price</th>
-        <th>URL</th>
-        <th>Offer</th>
+        <th>Background  Image</th>
+        <th>Front Image</th> 
         <th>Status</th> 
         <th>Action</th> 
         </tr>
     </thead>
     <tbody>
         
-   
         
-         <?php if(!empty($records))
+        
+        <?php if(!empty($plist))
                   {
                     
                      $i=1;
-                    foreach($records as $index=>$r)
+                    foreach($plist as $index=>$l)
                     {
                      $img = '';
-                     $images = $r->s_image;
+                      $images = $l->s_image;
+                      $images2 = $l->s_bag_img;
                       if(!empty($images))
                       {
-                       
                         $pathinfo = pathinfo($images);
-                        if(file_exists('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']))
+                        if(file_exists('.assets/front/assets/img/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']))
                         {
-                          $pp = base_url('assets/front/img/slider/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']);
+                          $pp = base_url('assets/front/assets/img/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']);
                           $img = '<img src="'.$pp.'">';
                         }
                         else
                         {
-                          $pp = base_url('assets/front/img/slider/'.$images);
+                          $pp = base_url('assets/front/assets/img/'.$images);
                           $img = '<img class="zoom" src="'.$pp.'" width="60" height="60">';
                         }
 
-                      } 
+                      }
+                      if(!empty($images2))
+                      {
+                        $pathinfo = pathinfo($images2);
+                        if(file_exists('.assets/front/assets/img/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']))
+                        {
+                          $pp2 = base_url('assets/front/assets/img/'.$pathinfo['dirname'].'/60_60_'.$pathinfo['basename']);
+                          $img2 = '<img src="'.$pp2.'">';
+                        }
+                        else
+                        {
+                          $pp2 = base_url('assets/front/assets/img/'.$images2);
+                          $img2 = '<img class="zoom" src="'.$pp2.'" width="60" height="60">';
+                        }
+
+                      }
                  
                       ?>
-
-
-                                                  
-                                                 
-
                       <tr>
-                      <td><?=$i++;?></td>
-                      <td><?=$img;?></td>
-                      <td><?=$r->s_title; ?></td>
-                      <td><?=$r->s_desc; ?></td>
-                      <td><?=$r->s_original_price; ?></td>
-                      <td><?=$r->s_discount_price; ?></td>
-                      <td><?=$r->s_url; ?></td>
-                      <td><?=$r->s_offer; ?></td>
-                      <td><?=($r->s_status=='1'?'active':'inactive');?></td>
+                        <td><?=$index+1;?></td>
+                        <td><?=$l->s_title;?></td>
+                        <td>
+                          <?php
+                          echo $img2;
+                          ?>
                         
-                       
+                        </td>
+                        <td>
+                          <?php
+                          echo $img;
+                          ?>
                         
+                        </td>
+                        <td><?=($l->s_status=='1'?'active':'inactive');?></td>
+                      
+                       <td>
+                       <a href="<?=base_url()?>add-slider/<?=$l->s_id;?>" id="<?=$l->s_id;?>" class="btn edit-slider  btn-primary" title="Delete <?=$l->s_title;?>"> <i class="fa fa-edit"></i></a>
+                       <a href="javascript:void(0)" id="<?=$l->s_id;?>" class="btn del-slider  btn-danger" title="Delete <?=$l->s_title;?>"> <i class="fa fa-trash"></i></a>
                        
-                        <td>  <a href="add-slider/<?=$r->s_id;?>"  class="btn edit-cat btn-info" title="Edit"> <i class="fa fa-edit"></i></a>
-                         
-                     <a href="javascript:void(0)" id="<?=$r->s_id;?>" class="btn del-slider  btn-danger" title="Delete"> <i class="fa fa-trash"></i></a>
-                   
-                     </td>
+                       </td>
                            
                       
                         
                       </tr>
                       <?php
-                     
+                      ++$i;
                     }
                   }
                 ?>

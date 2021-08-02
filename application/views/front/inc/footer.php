@@ -1,6 +1,12 @@
-<?php $contact = getcontact();
+<?php 
+   $contact = getcontact();
 	$con=$contact[0]; 
-    ?>
+   $sss = $this->session->get_userdata("lg_user");
+   if(!empty($sss['lg_user']['user_id']))
+   {
+      $user_id = enc($sss['lg_user']['user_id'] ,'d');
+   }
+?>
 
 <!--    Footer Area Start    -->
 <footer>
@@ -9,27 +15,27 @@
                <div class="col" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="700">
                   <h2>Information</h2>
                   <ul>
-                     <li><a href="#"> Delivery information </a></li>
-                     <li><a href="#"> Privacy Policy</a></li>
-                     <li><a href="#"> Terms & Conditions</a></li>
+                     <!-- <li><a href="#"> Delivery information </a></li> -->
+                     <li><a href="<?=base_url();?>Privacy-policy"> Privacy Policy</a></li>
+                     <li><a href="<?=base_url();?>Terms-of-use"> Terms & Conditions</a></li>
                   </ul>
                </div>
                <div class="col" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1200">
                   <h2>Account</h2>
                   <ul>
-                     <li><a href="#"> My account </a></li>
-                     <li><a href="#"> My orders</a></li>
-                     <li><a href="#"> Returns</a></li>
-                     <li><a href="#"> Shipping</a></li>
-                     <li><a href="#"> Wishlist</a></li>
+                     <li><a href="<?=base_url();?><?=!empty($user_id)?'user-profile':'user-login'?>"> My account </a></li>
+                     <li><a href="<?=base_url();?><?=!empty($user_id)?'user-profile':'user-login'?>"> My orders</a></li>
+                     <li><a href="<?=base_url();?><?=!empty($user_id)?'user-profile':'user-login'?>"> Returns</a></li>
+                     <li><a href="<?=base_url();?><?=!empty($user_id)?'user-profile':'user-login'?>"> Shipping</a></li>
+                     <li><a href="<?=base_url();?>cart-page"> Wishlist</a></li>
                   </ul>
                </div>
                <div class="col" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="1600">
                   <h2>Store</h2>
                   <ul>
-                     <li><a href="#"> Bestsellers </a></li>
-                     <li><a href="#"> Discount</a></li>
-                     <li><a href="#"> Latest products</a></li>
+                     <li><a href="<?=base_url();?>#best-sellers"> Bestsellers </a></li>
+                     <!-- <li><a href="<?=base_url();?>"> Discount</a></li> -->
+                     <li><a href="<?=base_url();?>#featured-products"> Latest products</a></li>
                   </ul>
                </div>
                <div class="col" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-duration="2000">

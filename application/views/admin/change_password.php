@@ -47,30 +47,36 @@
                   <div class="row">
                     <!-- <input type="hidden" id="cid" name="cid" value="<?php if (isset($login_data)){ echo $login_data[0]->login_id; } ?>"> -->
                     <input type="hidden" id="cid" name="cid" value="<?php foreach($records as $r) { echo $r->login_id;}  ?>">
-                    <div class="col-md-12">
-                       <div class="form-group">
-                      <label for="exampleInputEmail1">Current Password<span class="compulsory">*</span></label>
-                      <input type="text" class="form-control" id="currentpassword" name="currentpassword" placeholder="Enter Current Password" value="<?php if (isset($logindata)){ echo $logindata[0]->password; } ?>" >
+                    
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Current Password<span class="compulsory">*</span></label>
+                        <input type="text" class="form-control" id="currentpassword" name="currentpassword" placeholder="Enter Current Password" value="<?php if (isset($logindata)){ echo $logindata[0]->password; } ?>" >
+                      </div>
+                      <span id="currentpassword_error" class="validation-error"></span>
                     </div>
-                    <span id="currentpassword_error" class="validation-error"></span>
-                    </div>
+                    <div class="col-md-3"></div>
                   
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">New Password<span class="compulsory">*</span></label>
+                        <input type="text" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password"  >
+                      </div>
+                      <span id="newpassword_error" class="validation-error"></span>
+                    </div>
+                    <div class="col-md-3"></div>
 
-                    <div class="col-md-12">
-                       <div class="form-group">
-                      <label for="exampleInputEmail1">New Password<span class="compulsory">*</span></label>
-                      <input type="text" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password"  >
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Confirm Password<span class="compulsory">*</span></label>
+                        <input type="text" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password"  >
+                      </div>
+                      <span id="confirmpassword_error" class="validation-error"></span>
                     </div>
-                    <span id="newpassword_error" class="validation-error"></span>
-                    </div>
-
-                    <div class="col-md-12">
-                       <div class="form-group">
-                      <label for="exampleInputEmail1">Confirm Password<span class="compulsory">*</span></label>
-                      <input type="text" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password"  >
-                    </div>
-                    <span id="confirmpassword_error" class="validation-error"></span>
-                    </div>
+                    <div class="col-md-3"></div>
                
                     
                   

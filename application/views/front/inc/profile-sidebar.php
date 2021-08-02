@@ -21,7 +21,7 @@
 				</li>
 			</ul>
 		</li>
-		<li class="ctgli">
+		<!-- <li class="ctgli">
 			<a href="javascript:void(0);" class="ctga ">
 			<i class="ti-write"></i>
 			MY STUFF
@@ -32,7 +32,7 @@
 					<a  class="ctgaChild" id="my-coupon">My Coupons</a>
 				</li>
 			</ul>
-		</li>
+		</li> -->
 		<li class="ctgli">
 			<a href="javascript:void(0);" class="ctga" id="my-order">
 				<div class="ok"></div>
@@ -42,7 +42,11 @@
 		</li>
 		<hr />
 		<li class="ctgli">
+<<<<<<< HEAD
 			<a  class="ctga clslogout" id="my-order">
+=======
+			<a class="ctga clslogout" id="my-order">
+>>>>>>> 9d6fdcb1c2f8762258852808f7618e0d55ddec53
 				Logout
 			</a>
 		</li>
