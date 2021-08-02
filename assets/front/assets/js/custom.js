@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-<<<<<<< HEAD
    // user profile
       //  $("#chage-pwd-next").click(function(){
       //      $("#new-pwd").hide();
@@ -82,18 +81,6 @@ $( document ).ready(function() {
          }, 1000);
        $("#add-deliv-add, #add-delivery").hide();
        $("#deliv-add").show();
-=======
-// user profile
-   //  $("#chage-pwd-next").click(function(){
-   //      $("#new-pwd").hide();
-   //      $("#opt-pwd").show();
-   //   });
-
-
-    $("#edit-personal-info").click(function(){
-        $("#personal-info").toggle();
-        $("#personal-info-fld").toggle();
->>>>>>> 9d6fdcb1c2f8762258852808f7618e0d55ddec53
      });
 
      $(".address_edit").click(function(){
@@ -297,12 +284,7 @@ function increaseValue() {
               }
           }); 
     
-<<<<<<< HEAD
-       $(document).on('click','.clslogout',function(){
-         var baseurl   = $("#base").val();
-         document.location = baseurl+'/user-logout';
-         })
-=======
+    
       return false;
 
     })
@@ -319,4 +301,3 @@ $(document).on('click','.ctmain',function()
   document.location = baseurl+'cat-detail/'+slug;
 
 })
->>>>>>> 9d6fdcb1c2f8762258852808f7618e0d55ddec53

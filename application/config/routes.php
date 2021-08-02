@@ -177,18 +177,48 @@ $route['top-products-image']='admin/Top_products/image';
 
 
 
+$route['category']= 'admin/Category_controller/category';
+$route['add-category'] = 'admin/Category_controller/add_category';
+$route['add-category/(:num)'] = 'admin/Category_controller/add_category/$1';
+$route['category-action']= 'admin/Category_controller/category_action';
+$route['delete-category']='admin/Category_controller/category_delete';
+
+//register
+$route['register']= 'admin/Register_controller/register';
+$route['delete-register']='admin/Register_controller/register_delete';
+$route['view-register']='admin/Register_controller/view_register';
+
+$route['social-media'] = 'admin/Main_contact_controller/socialmedia_info';
+$route['social-media-action'] = 'admin/Main_contact_controller/social_media_action';
+
+
+//main contact
+$route['main_contact'] = 'admin/Main_contact_controller/main_contact';
+$route['add-main/(:num)'] = 'admin/Main_contact_controller/add_main/$1';
+$route['mainaction']='admin/Main_contact_controller/main_action';
+$route['view-main']='admin/Main_contact_controller/view_main';
+
+//slider
+$route['slider']= 'admin/Slider_controller/slider';
+$route['add-slider'] = 'admin/Slider_controller/add_slider';
+$route['add-slider/(:num)'] = 'admin/Slider_controller/add_slider/$1';
+$route['slider-action']= 'admin/Slider_controller/slider_action';
+$route['delete-slider']='admin/Slider_controller/slider_delete';
+$route['slider-image']='admin/Slider_controller/image';
+
+
 
 //contact us
 $route['contact'] = 'admin/Contact_controller/contact';
 $route['contact_list']='admin/Contact_controller/contact_list';
 
 //slider
-$route['add-slider'] = 'admin/Slider_controller/add_slider';
-$route['add-slider/(:num)'] = 'admin/Slider_controller/add_slider/$1';
-$route['submit-slider']= 'admin/Slider_controller/addSlider';
-$route['image']='admin/Slider_controller/image';
-$route['slider_list']= 'admin/Slider_controller/slider_list';
-$route['deleteslider']='admin/Slider_controller/slider_delete';
+// $route['add-slider'] = 'admin/Slider_controller/add_slider';
+// $route['add-slider/(:num)'] = 'admin/Slider_controller/add_slider/$1';
+// $route['submit-slider']= 'admin/Slider_controller/addSlider';
+// $route['image']='admin/Slider_controller/image';
+// $route['slider_list']= 'admin/Slider_controller/slider_list';
+// $route['deleteslider']='admin/Slider_controller/slider_delete';
 
 
 //about
@@ -231,7 +261,7 @@ $route['search-in-menu'] = 'Home/searchinmenu';
 $route['Terms-of-use'] = 'home/Terms_of_use';
 $route['Privacy-policy'] = 'home/Privacy_policy';
 
-
+$route['newsletter-action'] ='Home/news_act';
 
 
 
