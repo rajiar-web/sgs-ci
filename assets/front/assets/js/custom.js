@@ -228,7 +228,7 @@ function increaseValue() {
 
 
 
-  $(document).on('click','.email-btn',function(){
+   $(document).on('click','.email-btn',function(){
      
       $('.validation-error').html('');
       $("#spinner").show();
@@ -242,6 +242,7 @@ function increaseValue() {
          $.ajax({
            
             url : baseurl+'newsletter-action',
+            dataType:'json',
             type : 'post',
             data : form_data,
             cache: false,
@@ -250,31 +251,33 @@ function increaseValue() {
     
               success:function(data)
               { 
-                  console.log(data[0].res);
+                  // console.log(data[0].res);
+                  // alert('hii');
                   $(".error").html("");
                   $("#spinner").hide();
                   $(".cat-btn").show();
                   if(data.res == 1)
-                   { 
-                      alertify.success(data.msg);
+                  { 
+                     alertify.success(data.msg);
                     
-                   }
-                   else
-                {
+                  }
+                  else
+                  {
                   
-                  //   if($.isEmptyObject(data.errors))
-                  //   {
+                     if($.isEmptyObject(data.errors))
+                     {
                         alertify.error(data.msg);
-                  //   }
-                  //   else
-                  //   {
-                  //       for(var key in data.errors)
-                  //       {
-                  //          var v = data.errors[key];
-                  //          alertify.error(v);
-    
-                  //       }
-                  //   }
+                     }
+                     else
+                     {
+                           for(var key in data.errors)
+                           {
+                              // alert(key);
+                              var v = data.errors[key];
+                              alertify.error(v);
+      
+                           }
+                     }
                     
                     
                     

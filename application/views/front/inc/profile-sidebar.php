@@ -42,11 +42,7 @@
 		</li>
 		<hr />
 		<li class="ctgli">
-<<<<<<< HEAD
-			<a  class="ctga clslogout" id="my-order">
-=======
 			<a class="ctga clslogout" id="my-order">
->>>>>>> 9d6fdcb1c2f8762258852808f7618e0d55ddec53
 				Logout
 			</a>
 		</li>

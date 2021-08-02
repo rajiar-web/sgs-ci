@@ -159,6 +159,18 @@
          });
       </script>        
         <?php $this->load->view('front/inc/scripts');?>
-        
+        <script>
+          $( document ).ready(function() {
+            $('.page-item a').each(function() {
+              $(this).attr('class', 'page-link');
+            });
+            
+            $('.pagination a').each(function() {
+              $(this).attr('class', 'page-link');
+            });
+
+            
+          });
+        </script>
     </body>
 </html>
