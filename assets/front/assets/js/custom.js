@@ -10,6 +10,9 @@ $( document ).ready(function() {
            $("#personal-info").toggle();
            $("#personal-info-fld").toggle();
         });
+
+
+        
    
         $(".address_edit").click(function(){
          $(".personal-address").toggle();
@@ -219,4 +222,7 @@ $( document ).ready(function() {
    
        })
     
-   
+       $(document).on('click','.clslogout',function(){
+         var baseurl   = $("#base").val();
+         document.location = baseurl+'/user-logout';
+         })
