@@ -116,6 +116,68 @@ $route['logout'] = 'admin/Login/admin_logout';
 $route['changepassword'] = 'admin/Login/change_password';
 $route['passwordaction'] = 'admin/Login/password_action';
 
+
+//products
+$route['products']= 'admin/Products_controller/products';
+$route['add-products'] = 'admin/Products_controller/add_products';
+$route['add-products/(:num)'] = 'admin/Products_controller/add_products/$1';
+$route['products-action']= 'admin/Products_controller/products_action';
+$route['delete-products']='admin/Products_controller/products_delete';
+$route['products-image']='admin/Products_controller/image';
+
+$route['set-attribute/(:num)']='admin/Products_controller/set_attribute/$1';
+$route['attribute-action']='admin/Products_controller/attribute_action';
+
+//products attributes
+$route['attributes']= 'admin/Attributes_controller/attributes';
+$route['add-attributes'] = 'admin/Attributes_controller/add_attributes';
+$route['add-attributes/(:num)'] = 'admin/Attributes_controller/add_attributes/$1';
+$route['attributes-action']= 'admin/Attributes_controller/attributes_action';
+$route['delete-attributes']='admin/Attributes_controller/attributes_delete';
+
+//product classification
+$route['pr-classification']= 'admin/Product_classification/product_classification';
+$route['add-classification'] = 'admin/Product_classification/add_classification';
+$route['add-classification/(:num)'] = 'admin/Product_classification/add_classification/$1';
+$route['classification-action']= 'admin/Product_classification/classification_action';
+$route['delete-classification']='admin/Product_classification/classification_delete';
+
+
+$route['product-classify'] = 'admin/Product_classification/Classifications';
+$route['product-classify-load'] = 'admin/Product_classification/product_classify_list';
+$route['set-classification'] = 'admin/Product_classification/setClassification';
+
+
+//best sellers
+$route['best-sellers']= 'admin/Best_sellers/best_sellers';
+$route['add-best-sellers'] = 'admin/Best_sellers/add_best_sellers';
+$route['add-best-sellers/(:num)'] = 'admin/Best_sellers/add_best_sellers/$1';
+$route['best-sellers-action']= 'admin/Best_sellers/best_sellers_action';
+$route['delete-best-sellers']='admin/Best_sellers/best_sellers_delete';
+$route['best-sellers-image']='admin/Best_sellers/image';
+
+
+//featured products
+$route['featured-products']= 'admin/Featured_products/featured_products';
+$route['add-featured-products'] = 'admin/Featured_products/add_featured_products';
+$route['add-featured-products/(:num)'] = 'admin/Featured_products/add_featured_products/$1';
+$route['featured-products-action']= 'admin/Featured_products/featured_products_action';
+$route['delete-featured-products']='admin/Featured_products/featured_products_delete';
+$route['featured-products-image']='admin/Featured_products/image';
+
+
+//home page top products
+$route['top-products']= 'admin/Top_products/top_products';
+$route['add-top-products'] = 'admin/Top_products/add_top_products';
+$route['add-top-products/(:num)'] = 'admin/Top_products/add_top_products/$1';
+$route['top-products-action']= 'admin/Top_products/top_products_action';
+$route['delete-top-products']='admin/Top_products/top_products_delete';
+$route['top-products-image']='admin/Top_products/image';
+
+
+
+
+
 //contact us
 $route['contact'] = 'admin/Contact_controller/contact';
 $route['contact_list']='admin/Contact_controller/contact_list';

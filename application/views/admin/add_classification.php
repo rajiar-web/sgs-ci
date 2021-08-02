@@ -36,55 +36,42 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="main-card-title card-title">Change Password</h3>
+          <h3 class="main-card-title card-title">Classification</h3>
 
          
         </div>
-        
-               
-           <?=form_open('',array("id"=>"cform"));?>
+              <?=form_open('',array("id"=>"cform"));?>
                 <div class="card-body">
                   <div class="row">
-                    <!-- <input type="hidden" id="cid" name="cid" value="<?php if (isset($login_data)){ echo $login_data[0]->login_id; } ?>"> -->
-                    <input type="hidden" id="cid" name="cid" value="<?php foreach($records as $r) { echo $r->login_id;}  ?>">
-                    <div class="col-md-12">
-                       <div class="form-group">
-                      <label for="exampleInputEmail1">Current Password<span class="compulsory">*</span></label>
-                      <input type="text" class="form-control" id="currentpassword" name="currentpassword" placeholder="Enter Current Password" value="<?php if (isset($logindata)){ echo $logindata[0]->password; } ?>" >
-                    </div>
-                    <span id="currentpassword_error" class="validation-error"></span>
-                    </div>
+                    <input type="hidden" id="cid" name="cid" value="<?php echo(!empty($records)?$records[0]->pc_id:''); ?>">
+
+                   
+
+
                   
-
-                    <div class="col-md-12">
-                       <div class="form-group">
-                      <label for="exampleInputEmail1">New Password<span class="compulsory">*</span></label>
-                      <input type="text" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password"  >
-                    </div>
-                    <span id="newpassword_error" class="validation-error"></span>
-                    </div>
-
-                    <div class="col-md-12">
-                       <div class="form-group">
-                      <label for="exampleInputEmail1">Confirm Password<span class="compulsory">*</span></label>
-                      <input type="text" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password"  >
-                    </div>
-                    <span id="confirmpassword_error" class="validation-error"></span>
-                    </div>
+          
                
+                    <div class="col-md-12">
+                       <div class="form-group">
+                      <label for="exampleInputEmail1">Product Classification<span class="compulsory">*</span></label>
+                      <input type="text" class="form-control" id="classification" name="classification" placeholder="Enter Classification" value="<?php if (isset($records)){ echo $records[0]->pc_classification; } ?>">
+                    </div>
+                    <span id="classification_error" class="validation-error"></span>
+                    </div>
+                    
                     
                   
 
-                  </div>
-             
-                </div>
+                   
+               
+                   
                 <!-- /.card-body -->
 
                 <div class="card-footer">
                    <span id="spinner"><i class="fa fa-spin fa-spinner"></i></span>
                    <button type="submit" class="btn cat-btn btn-primary">Submit</button>
                 </div>
-              <?=form_close();?>
+             </form>
        
        
       </div>
@@ -92,8 +79,8 @@
 
 
     </section>
-   
-    
+    <!-- /.content -->
+
 
   </div>
   <!-- /.content-wrapper -->
@@ -111,13 +98,14 @@
 
 <?php $this->load->view('admin/inc/scripts');?>
 <script src="<?=admin_custom_js();?>common.js"></script>
-<script src="<?=admin_custom_js();?>password.js"></script>
- 
+<script src="<?=admin_custom_js();?>classification.js"></script>
+ <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
  <!-- DataTables -->
 <script src="<?=admin();?>plugins/datatables/jquery.dataTables.js"></script>
 <script src="<?=admin();?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script type="text/javascript">
-  
+//   CKEDITOR.replace( 'desc' );
+   
 </script>
 </body>
 

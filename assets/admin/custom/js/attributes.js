@@ -7,12 +7,12 @@ $(document).ready(function(){
           $(".cat-btn").hide();
           var baseurl   = $("#base").val();
           var form_data = $("#cform").serializeArray();
-          form_data.push({name: 'desc', value: CKEDITOR.instances.desc.getData()});  
+         // form_data.push({name: 'desc', value: CKEDITOR.instances.desc.getData()});  
              $.ajax({
                   type:'POST',
                   dataType:'json',
               
-                url:baseurl+'slider-action',
+                url:baseurl+'attributes-action',
                   data:form_data,
                  
                   success:function(data)
@@ -24,7 +24,7 @@ $(document).ready(function(){
                       if(data.res == 1)
                        { 
                           success(data.msg);
-                          setTimeout(function(){ window.location=baseurl+'slider'; }, 700);
+                          setTimeout(function(){ window.location=baseurl+'attributes'; }, 700);
                        }
                        else
                     {
@@ -53,47 +53,10 @@ $(document).ready(function(){
   })
 
 
-  $(document).on('change','#inputlargefile',function(){
- 
-                  $('#imgPath').html('<div ><i class="fa fa-spin fa-spinner"></i></div>');
-                 var baseurl = $('#base').val();
-                 var file_data = $('#inputlargefile').prop('files')[0];
-                 var form_data = new FormData();
-               
-                 form_data.append('file', file_data);
-                 $.ajax({
-                     url : baseurl+'slider-image', 
-                     type: "POST",
-                     dataType:'json',
-                     data: form_data,
-                     contentType: false,  
-                     cache: false,
-                     processData: false,
-                     success: function (data) {
-                         var filePath = data.path;
-                         var fileName = data.filename;
-                        
-                         if(filePath)
-                         {
-                             var flpth = "'"+ filePath +"'";
-                        
-                        var imgsrc = '<div><img class="image-preview" src='+baseurl + filePath + '  class="upload-preview" width="30%" /><div i onclick="delblogImg('+ flpth + ')" style="width: 30%;text-align: right;cursor: pointer;"></div></div>';
-                          $("#imgPath").html(imgsrc); 
-                          $('#imgname').val(fileName); 
-                         }
-                               
-                     }
-                 });
-             });
- 
-  $(document).on('click','.uploadbtnlarge',function(){
 
-             $('#inputlargefile').click();
- 
-         });
 
-         $(document).on('click','.del-slider',function(){
-            $('.main-card-title').html('Delete Slider');
+         $(document).on('click','.del-attributes',function(){
+            $('.main-card-title').html('Delete Attributes');
            var id = $(this).attr('id');
           
            alertify.confirm("Are you sure ?.",
@@ -104,7 +67,7 @@ $(document).ready(function(){
                   
                    form_data.append('id', id);
                    $.ajax({
-                           url : baseurl+'delete-slider',
+                           url : baseurl+'delete-attributes',
                            type : 'post',
                            data : form_data,
                            cache: false,
@@ -130,13 +93,9 @@ $(document).ready(function(){
              },
              function(){
                alertify.error('Canceled');
-             }).set({title:"Confirm delete Slider"}).set({labels:{ok:'Delete', cancel: 'Cancel'}});
+             }).set({title:"Confirm delete Attributes"}).set({labels:{ok:'Delete', cancel: 'Cancel'}});
         });
  
 
 
-        
-
-
-
-        
+     

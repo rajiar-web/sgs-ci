@@ -4,7 +4,7 @@
     <a href="dashboard" class="brand-link" align="center">
      <!--  <img src="<?=admin();?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8"> -->
-      <span class="brand-text font-weight-light" style="font-weight: bold;font-style: italic;">Velvet-Detailing</span>
+      <span class="brand-text font-weight-light" style="font-weight: bold;font-style: italic;">SGS</span>
     </a>
 
     <!-- Sidebar -->
@@ -34,88 +34,99 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="<?=base_url('slider_list');?>" class="nav-link">
-              <i class="nav-icon fas fa-align-justify"></i>
-              <p>
-                Slider
-                <i class="right fas fa-angle-right"></i>
-              </p>
-            </a>
-        </li>
-        <li class="nav-item has-treeview">
-            <a href="<?=base_url('about_list');?>" class="nav-link">
-            <i class="nav-icon fas fa-angle-double-down"></i>
-              <p>
-                About
-                <i class="right fas fa-angle-right"></i>
-              </p>
-            </a>
-        </li>
 
-        <li class="nav-item has-treeview">
-            <a href="<?=base_url('recent_work');?>" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Recent Work
-                <i class="right fas fa-angle-right"></i>
-              </p>
-            </a>
-        </li>
-        <li class="nav-item has-treeview">
-            <a href="<?=base_url('services_list');?>" class="nav-link">
-              <i class="fas fa-users nav-icon"></i>
-              <p>Services </p>
-              <i class="right fas fa-angle-right"></i>
-            </a>
-        </li>
-        <li class="nav-item has-treeview">
-            <a href="<?=base_url('contact');?>" class="nav-link">
-              <i class="nav-icon far fa-comment"></i>
-              <p>
-                Messages
-                <i class="right fas fa-angle-right"></i>
-              </p>
-            </a>
-        </li>
 
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cogs"></i>
-              <p>
-                Settings
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-               <li class="nav-item">
-                <a href="<?=base_url('settings');?>" class="nav-link">
+
+         
+
+            <li class="nav-item">
+                <a href="<?=base_url('category');?>" class="nav-link">
+                  <i class="nav-icon fas fa-angle-double-down"></i>
+                  <p>Category</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?=base_url('products');?>" class="nav-link">
+                  <i class="nav-icon fas fa-fan"></i>
+                  <p>Products</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?=base_url('attributes');?>" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Product Attributes</p>
+                </a>
+              </li>
+
+
+           
+             
+              <li class="nav-item">
+                <a href="<?=base_url('product-classify');?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Contact Info</p>
+                  <p>Classification List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?=base_url('social-media');?>" class="nav-link">
+                <a href="<?=base_url('best-sellers');?>" class="nav-link">
+                  <i class="nav-icon fas fa-fan"></i>
+                  <p>Home Best sellers</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('featured-products');?>" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Featured Products</p>
+                </a>
+              </li>
+                  
+              <li class="nav-item">
+                <a href="<?=base_url('top-products');?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
+                  <p>Home Top Products</p>
+                </a>
+              </li>
+
+             <li class="nav-item">
+                <a href="<?=base_url('register');?>" class="nav-link">
+                  <i class="nav-icon fas fa-align-justify"></i>
+                  <p>Registration Details</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?=base_url('slider');?>" class="nav-link">
+                  <i class="nav-icon fas fa-align-justify"></i>
+                  <p>Slider</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?=base_url('main_contact');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Main Contact</p>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a href="<?=base_url('social-media');?>" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
                   <p>Social Media</p>
                 </a>
               </li>
+
+
               <li class="nav-item">
                 <a href="<?=base_url('changepassword');?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Change Password </p>
+                  <p>Change Password</p>
                 </a>
               </li>
-              </li>
-         
-         </ul>
-         </li>       
-          
 
-          
-
-            
-          <li class="nav-item">
+            <li class="nav-item">
             <a href="<?=base_url('logout');?>" class="nav-link">
               <i class="nav-icon fas fa-power-off"></i>
               <p>

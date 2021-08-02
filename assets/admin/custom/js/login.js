@@ -26,15 +26,15 @@ function login()
                      
 
                     if(data.res == 1)
-                    {
-                        success(data.msg);
+                    { 
+                        alertify.success(data.msg);
 						setTimeout(function(){ window.location = baseurl+data.url }, 700);
                     }
                     else
                     {
                         if($.isEmptyObject(data.errors))
                         {
-                            error(data.msg);
+                            alertify.error(data.msg);
                         }
                         else
                         {

@@ -1143,13 +1143,31 @@ function search_query($slug)
 }
 
 
+//admin side
 
+function getFullProductData($postData)
+{
+      $this->db->select(array("p.*","c1.c_category cat","c2.c_category sub"));
+  $this->db->from('tbl_products p') ; 
+  $this->db->join('tbl_category c1','c1.c_id=p.p_category','left') ;
+  $this->db->join('tbl_category c2','c2.c_id=c1.c_parent_id','left') ;
+  if(!empty($postData['slug']))
+    $this->db->where("p.p_slug",$postData['slug']);
 
+  $this->db->where("p.p_status",'1');
+  $this->db->order_by("p.p_id","desc");
+  $q=$this->db->get();
+  return $q->result(); 
+}
+function checkUser_front($uname)
+{
+  $this->db->where('r_email',$uname);
+  $this->db->where('r_status','1');
+  $this->db->where('user_type','2');
+  $q = $this->db->get('tbl_register');
+  return $q->result();
+}
 
-
-
-
-  
 
 
 }
