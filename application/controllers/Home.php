@@ -875,7 +875,7 @@ class Home extends CI_Controller
 	function news_act()
 	{
 		$this->load->library('form_validation');
-		$this->form_validation->set_error_delimiters('<div style="color:red;" >', '</div>');
+		
 		$this->form_validation->set_rules('email','Email','required|trim|valid_email');
 		
 		if(!$this->form_validation->run())
@@ -913,6 +913,7 @@ class Home extends CI_Controller
 			
 	    }
 	}	 
+	
 		echo json_encode($res);
 
 	}

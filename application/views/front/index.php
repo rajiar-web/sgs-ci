@@ -114,7 +114,7 @@
                                        {
                                        ?>
                                           <div class="col-12 col-lg-3 col-md-12 my-3 d-flex">
-                                             <a href="<?=$fp->link?>">
+                                             <a href="product-detail/<?=$fp->link?>">
                                                 <div class="card w-100">
                                                    <div class="product-image d-flex">
                                                       <img src="<?=front_images()?><?=$fp->image?>" class="card-img-top" alt="..." />
@@ -203,7 +203,7 @@
                         <p class="card-text">Works by pushing on base of
                            front face plate.
                         </p>
-                        <a href="#" class="btn btn-primary btn-collections">View  collections</a>
+                        <a href="<?php echo base_url('listing'); ?>" class="btn btn-primary btn-collections">View  collections</a>
                      </div>
                   </div>
                </div>
@@ -219,8 +219,10 @@
                             <div class="row g-0">
                                 <div class="col-md-8">
                                     <div class="card-body">
+                                       
                                         <h5 class="card-title"> <?=$bs->title?>
                                         </h5>
+                                   
                                         <h3 class="d-flex align-items-center">£<?=$bs->dis_rate?><span class="ms-3">£<?=$bs->org_rate?></span></h3>
                                     </div>
                                 </div>

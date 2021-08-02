@@ -250,7 +250,7 @@ function increaseValue() {
     
               success:function(data)
               { 
-                  //console.log(data);
+                  console.log(data[0].res);
                   $(".error").html("");
                   $("#spinner").hide();
                   $(".cat-btn").show();
@@ -262,19 +262,19 @@ function increaseValue() {
                    else
                 {
                   
-                    if($.isEmptyObject(data.errors))
-                    {
+                  //   if($.isEmptyObject(data.errors))
+                  //   {
                         alertify.error(data.msg);
-                    }
-                    else
-                    {
-                        for(var key in data.errors)
-                        {
-                           var v = data.errors[key];
-                           alertify.error(v);
+                  //   }
+                  //   else
+                  //   {
+                  //       for(var key in data.errors)
+                  //       {
+                  //          var v = data.errors[key];
+                  //          alertify.error(v);
     
-                        }
-                    }
+                  //       }
+                  //   }
                     
                     
                     
